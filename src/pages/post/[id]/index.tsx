@@ -5,9 +5,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../../../layout/Layout";
 
+
 export default function PostDetail() {
+  interface Post {
+    title: any,
+    content: any
+  }
   const router = useRouter();
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState<{title: any, content: any}>();
 
   useEffect(() => {
     let id = router.query.id;
@@ -64,11 +69,11 @@ export default function PostDetail() {
                     textTransform: "uppercase",
                   }}
                 >
-                  {post.title}
+                  {post?.title}
                 </h4>
                 <p
                   style={{ marginTop: "20px", color: "black" }}
-                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  dangerouslySetInnerHTML={{ __html: post?.content }}
                 />
               </Col>
               <Col lg={8} span={24}>

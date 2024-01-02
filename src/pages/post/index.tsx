@@ -44,6 +44,7 @@ export default function Post() {
       <Layout>
         <div style={{ position: "relative" }}>
           <Image
+            alt="image"
             height={"200px"}
             width={"100%"}
             src="https://static.vecteezy.com/system/resources/previews/000/677/302/original/abstract-technology-banner-background.jpg"
@@ -69,7 +70,7 @@ export default function Post() {
               post.map((data, index) => (
                 <Col lg={8} span={24} key={index} className="post-wrap">
                   <div>
-                    <Image width={"100%"} height={"75%"} src={data.thumbnail} />
+                    <Image alt="image" width={"100%"} height={"75%"} src={data.thumbnail} />
                   </div>
                   <div style={{}}>
                     <div>
