@@ -401,6 +401,7 @@ export default function ProductDetail() {
                     className="related-product"
                     lg={8}
                     span={24}
+                    key={index}
                     style={{
                       paddingRight: index == 0 || index == 1 ? "20px" : 0,
                     }}

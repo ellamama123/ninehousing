@@ -67,7 +67,7 @@ export default function Post() {
           <Row>
             {post.length &&
               post.map((data, index) => (
-                <Col lg={8} span={24} className="post-wrap">
+                <Col lg={8} span={24} key={index} className="post-wrap">
                   <div>
                     <Image width={"100%"} height={"75%"} src={data.thumbnail} />
                   </div>

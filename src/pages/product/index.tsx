@@ -210,6 +210,7 @@ export default function Home() {
                     {product &&
                       product.map((prd, index) => (
                         <Row
+                          key={index}
                           style={{ marginTop: 20, backgroundColor: "#F1F1F1" }}
                         >
                           <Col lg={6} span={24}>

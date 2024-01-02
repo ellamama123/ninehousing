@@ -8,9 +8,9 @@ const Activity: React.FC = () => (
       <p className="activity-title">Activity</p>
       <Row>
         {[0, 1, 2].map((index) => (
-          <Col lg={8} span={24} className="post-wrap">
+          <Col lg={8} span={24} className="post-wrap" key={index}>
             <div>
-              <Image width={"100%"} height={"75%"} src="/image/product-1.png" />
+              <Image width={"100%"} height={"75%"} alt="Image" src="/image/product-1.png" />
             </div>
             <div style={{}}>
               <div>

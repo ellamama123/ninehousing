@@ -11,6 +11,7 @@ const OurApartments: React.FC = () => (
             className="related-product"
             lg={8}
             span={24}
+            key={index}
           >
             <Row>
               <Col span={24}>

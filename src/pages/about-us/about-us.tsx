@@ -8,7 +8,7 @@ export default function AboutUs() {
     <div style={{width: '80%', margin: '0 auto'}}>
       <p>
         Toan Tien Housing build, lease, and operate serviced apartments in the
-        most livable neighborhoods of Hanoi's heart districts. The company has
+        most livable neighborhoods of Hanois heart districts. The company has
         about 500 apartment units across 60 apartment estates. The majority of
         all are rented in long-term contracts, and the others are opened for
         short stays in the meantime.
