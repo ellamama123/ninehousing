@@ -32,8 +32,8 @@ const validateMessages = {
 
 export default function ProductDetail() {
   const router = useRouter();
-  const [product, setProduct] = useState([]);
-  const [email, setEmail] = useState();
+  const [product, setProduct] = useState<{name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any}>();
+  const [email, setEmail] = useState<string>();
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
@@ -44,7 +44,6 @@ export default function ProductDetail() {
         .get("https://web-developing.site/api/rooms/" + id)
         .then((response) => {
           setProduct(response.data);
-          // console.log('121', response);
         });
     }
   }, [router.query.id]);
@@ -68,7 +67,7 @@ export default function ProductDetail() {
   return (
     <>
       <Head>
-        <title>{product.name} | Nine Housing</title>
+        <title>{product?.name} | Nine Housing</title>
       </Head>
       <Layout>
         <div style={{ margin: "30px 0 50px 0" }}>
@@ -138,8 +137,8 @@ export default function ProductDetail() {
                   <div>
                     <Row>
                       <Col span={18} style={{ marginTop: 30 }}>
-                        <h1>{product.name}</h1>
-                        <p style={{ marginTop: 15 }}>{product.address}</p>
+                        <h1>{product?.name}</h1>
+                        <p style={{ marginTop: 15 }}>{product?.address}</p>
                         <Row style={{ marginTop: 15 }}>
                           <Col
                             lg={4}
@@ -147,7 +146,7 @@ export default function ProductDetail() {
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <img width={20} src={`/icon/bed.png`} />
-                            <span>{product.bedroom} Br</span>
+                            <span>{product?.bedroom} Br</span>
                           </Col>
                           <Col
                             lg={4}
@@ -155,7 +154,7 @@ export default function ProductDetail() {
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <img width={20} src={`/icon/water.png`} />
-                            <span>{product.bathroom} Ba</span>
+                            <span>{product?.bathroom} Ba</span>
                           </Col>
                           <Col
                             lg={4}
@@ -163,13 +162,13 @@ export default function ProductDetail() {
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <img width={20} src={`/icon/square-Medical.png`} />
-                            <span>{product.acreage} Sq.Ft</span>
+                            <span>{product?.acreage} Sq.Ft</span>
                           </Col>
                         </Row>
                       </Col>
                       <Col span={6}>
                         <h2 style={{ marginTop: "50px" }}>
-                          ${product.price}/{product.unit}
+                          ${product?.price}/{product?.unit}
                         </h2>
                       </Col>
                     </Row>
@@ -177,7 +176,7 @@ export default function ProductDetail() {
                       <Col span={24}>
                         <div style={{ marginTop: "50px" }}>
                           <h3 style={{ marginBottom: "20px" }}>Description</h3>
-                          <p>{product.description}</p>
+                          <p>{product?.description}</p>
                         </div>
                       </Col>
                       <div style={{ marginTop: "50px" }}>
@@ -410,6 +409,7 @@ export default function ProductDetail() {
                       <Col span={24}>
                         <div>
                           <Image
+                            alt="test"
                             width={"100%"}
                             height={"75%"}
                             src="http://localhost:3000/image/related_properties.png"

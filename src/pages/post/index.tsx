@@ -6,7 +6,7 @@ import Link from "next/link";
 import Layout from "../../layout/Layout";
 
 export default function Post() {
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState<{thumbnail: any,title: any, content: any, id: any}[]>([]);
   const [perPage, setPerPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
@@ -70,7 +70,7 @@ export default function Post() {
               post.map((data, index) => (
                 <Col lg={8} span={24} key={index} className="post-wrap">
                   <div>
-                    <Image alt="image" width={"100%"} height={"75%"} src={data.thumbnail} />
+                    <Image alt="image" width={"100%"} height={"75%"} src={data?.thumbnail} />
                   </div>
                   <div style={{}}>
                     <div>
@@ -89,7 +89,7 @@ export default function Post() {
                             color: "black",
                           }}
                         >
-                          {data.title}
+                          {data?.title}
                         </p>
                         <p
                           style={{
@@ -98,7 +98,7 @@ export default function Post() {
                             color: "black",
                             fontWeight: "500",
                           }}
-                          dangerouslySetInnerHTML={{ __html: data.content }}
+                          dangerouslySetInnerHTML={{ __html: data?.content }}
                         />
                         <p
                           style={{
@@ -119,7 +119,7 @@ export default function Post() {
                           }}
                         >
                           <Link
-                            href={window.location.origin + "/post/" + data.id}
+                            href={window.location.origin + "/post/" + data?.id}
                             title=""
                           >
                             View more

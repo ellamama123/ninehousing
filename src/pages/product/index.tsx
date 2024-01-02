@@ -5,7 +5,6 @@ import {
   Col,
   Button,
   Input,
-  Space,
   DatePicker,
   Radio,
   Checkbox,
@@ -26,7 +25,7 @@ const optionPrice = [
 ];
 
 export default function Home() {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState<{id: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any}[]>([]);
   const [price, setPrice] = useState(null);
   const [name, setName] = useState("");
   const [sort, setSort] = useState("");
