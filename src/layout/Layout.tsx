@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Header />

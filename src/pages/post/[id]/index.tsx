@@ -25,11 +25,12 @@ export default function PostDetail() {
   return (
     <>
       <Head>
-        <title>{post.title} | Nine Housing</title>
+        <title>{post?.title} | Nine Housing</title>
       </Head>
       <Layout>
         <div style={{ position: "relative" }}>
           <Image
+            alt="image"
             height={"200px"}
             width={"100%"}
             src="https://static.vecteezy.com/system/resources/previews/000/677/302/original/abstract-technology-banner-background.jpg"
@@ -84,6 +85,7 @@ export default function PostDetail() {
                   </p>
                   <div style={{ marginBottom: "30px" }}>
                     <Image
+                      alt="image"
                       width={"100%"}
                       height={"75%"}
                       src="http://localhost:3000/image/related_properties.png"

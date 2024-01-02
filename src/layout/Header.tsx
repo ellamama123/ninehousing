@@ -10,22 +10,12 @@ import {
   Image,
   Select,
 } from "antd";
-import {
-  EuroOutlined,
-  HeartOutlined,
-  BarsOutlined,
-  MenuOutlined,
-  CalculatorOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 
-const { SubMenu } = Menu;
-const { Text } = Typography;
-
 const Header = () => {
-  const [current, setCurrent] = useState("mail");
   const [visible, setVisible] = useState(false);
   const router = useRouter();
 
@@ -37,24 +27,18 @@ const Header = () => {
     setVisible(false);
   };
 
-  const handleClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
-
   return (
     <div className="menu">
       <div className="container">
         <Row>
           <Col span={3}>
-            <a href="/">
-              <Image src="/image/logo.png" alt="Logo" preview={false} />x
-            </a>
+            <Link href="/"> Home 
+              <Image src="/image/logo.png" alt="Logo" preview={false} />
+            </Link>
           </Col>
           <Col span={12}>
             <Menu
               className={styles.bigmenu}
-              onClick={handleClick}
               selectedKeys={[router.pathname]}
               mode="horizontal"
               overflowedIndicator={<MenuOutlined />}
