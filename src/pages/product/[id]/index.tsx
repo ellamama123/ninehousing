@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button, Image, Form, Input, message } from "antd";
+import { Row, Col, Button, Image, Form, Input, message, InputNumber, Select } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -369,6 +369,56 @@ export default function ProductDetail() {
                           style={{ width: "310px" }}
                           placeholder="Your Phone"
                         />
+                      </Form.Item>
+                      <Form.Item name={["location"]} rules={[{ required: true }]}>
+                        <Select
+                          defaultValue=""
+                          style={{ width: "100%" }}
+                          options={[
+                            { value: '', label: 'Property Location' },
+                            { value: 'lucy', label: 'Lucy' },
+                            { value: 'Yiminghe', label: 'yiminghe' },
+                          ]}
+                        />
+                      </Form.Item>
+                      <Form.Item name={["type"]} rules={[{ required: true }]}>
+                        <Select
+                          defaultValue=""
+                          style={{ width: "100%" }}
+                          options={[
+                            { value: '', label: 'Property Type' },
+                            { value: 'lucy', label: 'Lucy' },
+                            { value: 'Yiminghe', label: 'yiminghe' },
+                          ]}
+                        />
+                      </Form.Item>
+                      <Form.Item name={["bedroom"]} rules={[{ required: true }]}>
+                        <Select
+                          defaultValue=""
+                          style={{ width: "100%" }}
+                          options={[
+                            { value: '', label: 'Bedroom' },
+                            { value: '1', label: '1' },
+                            { value: '2', label: '2' },
+                          ]}
+                        />
+                      </Form.Item>
+                      <Form.Item name={["bathroom"]} rules={[{ required: true }]}>
+                        <Select
+                          defaultValue=""
+                          style={{ width: "100%" }}
+                          options={[
+                            { value: '', label: 'Bathroom' },
+                            { value: '1', label: '1' },
+                            { value: '2', label: '2' },
+                          ]}
+                        />
+                      </Form.Item>
+                      <Form.Item name={["Min Price"]} rules={[{ required: true }]}>
+                        <InputNumber min={1} defaultValue={3} />
+                      </Form.Item>
+                      <Form.Item name={["Max Price"]} rules={[{ required: true }]}>
+                        <InputNumber min={1} defaultValue={3} />
                       </Form.Item>
                       <Form.Item
                         wrapperCol={{ ...layout.wrapperCol }}

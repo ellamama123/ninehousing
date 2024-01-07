@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import Layout from '../layout/Layout';
 import MainCarousel from '@/layout/HomePage/MainCarousel';
 import DivOne from '@/layout/HomePage/DivOne';
@@ -7,10 +6,9 @@ import WhyChooseUs from '@/layout/HomePage/WhyChooseUs';
 import OurApartments from '@/layout/HomePage/OurApartments';
 import InteractiveMap from '@/layout/HomePage/InteractiveMap';
 import CustomerSay from '@/layout/HomePage/CustomerSay';
+import Reservation from '@/layout/HomePage/Reservation';
 import Activity from '@/layout/HomePage/Actitvity';
 import Partner from '@/layout/HomePage/Partner';
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -26,6 +24,7 @@ export default function Home() {
         <DivOne />
         <WhyChooseUs />
         <OurApartments />
+        <Reservation />
         <InteractiveMap />
         <CustomerSay />
         <Activity />

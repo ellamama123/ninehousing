@@ -102,15 +102,15 @@ const Footer = () => {
                     <Col span={24}>
                       <div>
                         <p>
-                          <Link href="/"> Our Product </Link>
+                          <Link href="/product"> Our Product </Link>
                         </p>
                         <p style={{ marginTop: "15px" }}>
                           {" "}
-                          <Link href="/"> About Us </Link>
+                          <Link href="/about-us"> About Us </Link>
                         </p>
                         <p style={{ marginTop: "15px" }}>
                           {" "}
-                          <Link href="/"> Blog </Link>
+                          <Link href="/blog"> Blog </Link>
                         </p>
                       </div>
                     </Col>

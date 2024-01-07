@@ -122,7 +122,8 @@ export default function Post() {
                             href={window.location.origin + "/post/" + data?.id}
                             title=""
                           >
-                            View more
+                            <span>View more</span>
+                            
                           </Link>
                         </Button>
                       </div>

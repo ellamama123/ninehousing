@@ -9,6 +9,7 @@ import {
   Radio,
   Checkbox,
   Pagination,
+  Select
 } from "antd";
 import type { RadioChangeEvent } from "antd";
 import Link from "next/link";
@@ -81,7 +82,7 @@ export default function Home() {
             }}
           >
             <Row>
-              <Col lg={8} span={24} className="search-name">
+              <Col lg={4} span={24} className="search-name">
                 <Input
                   className="input-name"
                   size="large"
@@ -114,8 +115,30 @@ export default function Home() {
                   placeholder="Check out"
                 />
               </Col>
+              <Col lg={4} span={24} className="search-name" style={{
+                 display: "flex",
+                 justifyContent: "flex-end",
+                 alignItems: "center",
+              }}>
+                <Select
+                  defaultValue="Choose Price"
+                  style={{ width: "90%", height: "100%" }}
+                  options={optionPrice}
+                />
+              </Col>
+              <Col lg={4} span={24} className="search-name"  style={{
+                 display: "flex",
+                 justifyContent: "flex-end",
+                 alignItems: "center",
+              }}>
+                <Select
+                  defaultValue="Choose Address"
+                  style={{ width: "90%", height: "100%", }}
+                  options={optionPrice}
+                />
+              </Col>
               <Col
-                lg={8}
+                lg={4}
                 span={24}
                 className="search-button"
                 style={{
@@ -142,34 +165,7 @@ export default function Home() {
 
             <div className="product" style={{ marginTop: 50 }}>
               <Row>
-                <Col lg={6} span={24}>
-                  <div>
-                    <div>
-                      <p style={{ fontWeight: "bold" }}>
-                        Your budget per night
-                      </p>
-                      <Radio.Group
-                        style={{ marginTop: 20 }}
-                        options={optionPrice}
-                        onChange={onChangePrice}
-                      >
-                        {optionPrice.length &&
-                          optionPrice.map((data, index) => (
-                            <Radio key={index} value={data.value}>
-                              {data.label}
-                            </Radio>
-                          ))}
-                      </Radio.Group>
-                    </div>
-                    <div style={{ marginTop: 20 }}>
-                      <p style={{ fontWeight: "bold" }}>Neighborhood</p>
-                      <div style={{ marginTop: 20 }}>
-                        <Checkbox>ABC</Checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={18} span={24}>
+                <Col lg={18} span={24} style={{margin: '0 auto'}}>
                   <div>
                     <div>
                       <h1
@@ -293,7 +289,7 @@ export default function Home() {
                                     }
                                     title=""
                                   >
-                                    Book now
+                                    <span>Book now</span>
                                   </Link>
                                 </Button>
                               </Col>

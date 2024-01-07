@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Image from 'next/image'
 import {
   Menu,
-  Typography,
+  Popover,
   Button,
   Drawer,
   Row,
@@ -15,9 +15,51 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 
+const content = () => {
+  const router = useRouter();
+
+  return (
+  <Menu
+  className={styles.bigmenu}
+  selectedKeys={[router.pathname]}
+  mode="inline"
+  overflowedIndicator={<MenuOutlined />}
+>
+  <Menu.Item key="/">
+    {/* <Link href="/"> <p>Home</p> </Link> */}
+  </Menu.Item>
+  <Menu.Item key="/product">
+    <Link href="/product"> Our Product </Link>
+  </Menu.Item>
+  <Menu.Item key="/post">
+    <Link href="/post"> Blog </Link>
+  </Menu.Item>
+  <Menu.Item key="/about-us">
+    <Link href="/about-us"> About Us </Link>
+  </Menu.Item>
+</Menu>);
+};
+
 const Header = () => {
   const [visible, setVisible] = useState(false);
-  const router = useRouter();
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const showDrawer = () => {
     setVisible(true);
@@ -28,34 +70,27 @@ const Header = () => {
   };
 
   return (
-    <div className="menu">
+    <div className={`menu ${scrolled ? 'scrolled-menu' : ''}`}>
       <div className="container">
-        <Row>
-          <Col span={3}>
-            <Link href="/"> Home 
-              <Image src="/image/logo.png" alt="Logo" preview={false} />
-            </Link>
-          </Col>
+        <Row style={{ display: "flex", alignItems: 'center'}}> 
           <Col span={12}>
-            <Menu
-              className={styles.bigmenu}
-              selectedKeys={[router.pathname]}
-              mode="horizontal"
-              overflowedIndicator={<MenuOutlined />}
-            >
-              <Menu.Item key="/">
-                <Link href="/"> Home </Link>
-              </Menu.Item>
-              <Menu.Item key="/product">
-                <Link href="/product"> Our Product </Link>
-              </Menu.Item>
-              <Menu.Item key="/post">
-                <Link href="/post"> Blog </Link>
-              </Menu.Item>
-              <Menu.Item key="/about-us">
-                <Link href="/about-us"> About Us </Link>
-              </Menu.Item>
-            </Menu>
+            <Row>
+              <Col span={4}>
+              <Popover content={content} title="">
+                  <div style={{color:"white", cursor: "pointer", fontSize: '24px'}}>
+                    <MenuOutlined />
+                    <span style={{marginLeft: '10px', fontSize: '18px', lineHight: '18px'}}>MENU</span>
+                  </div>
+                </Popover>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={3}>
+            <Link href="/">  
+              <div>
+              <Image src="/image/logo.png" alt="Logo" preview={false} />
+              </div>
+            </Link>
           </Col>
           <Col
             span={9}
