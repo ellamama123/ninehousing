@@ -16,12 +16,10 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 
 const content = () => {
-  const router = useRouter();
 
   return (
   <Menu
   className={styles.bigmenu}
-  selectedKeys={[router.pathname]}
   mode="inline"
   overflowedIndicator={<MenuOutlined />}
 >
@@ -79,7 +77,7 @@ const Header = () => {
               <Popover content={content} title="">
                   <div style={{color:"white", cursor: "pointer", fontSize: '24px'}}>
                     <MenuOutlined />
-                    <span style={{marginLeft: '10px', fontSize: '18px', lineHight: '18px'}}>MENU</span>
+                    <span style={{marginLeft: '10px', fontSize: '18px'}}>MENU</span>
                   </div>
                 </Popover>
               </Col>
