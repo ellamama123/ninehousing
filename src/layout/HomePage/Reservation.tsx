@@ -11,8 +11,10 @@ import {
   Form,
   InputNumber,
   Button,
+  message
 } from "antd";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -28,14 +30,15 @@ const validateMessages = {
   },
 };
 export default function Reservation() {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [email, setEmail] = useState<string>();
+
   const onFinish = (values: any) => {
-    let id = router.query.id;
     axios
       .post("https://web-developing.site/api/reservations", {
         name: values.Name,
         email: values.Email,
         phone: values.Phone,
-        room_id: id,
       })
       .then((response) => {
         messageApi.success("Room reservation request has been sent.", 1);
