@@ -236,6 +236,7 @@
     display: none;
     background-color: #deb25f;
   }
+
   .bigmenu {
     
     margin-top: 10px;
@@ -254,5 +255,8 @@
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+
   }
 }

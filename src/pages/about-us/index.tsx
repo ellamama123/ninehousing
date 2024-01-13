@@ -17,8 +17,10 @@ export default function PostDetail() {
       <Layout>
         <div style={{ position: "relative" }}>
           <Image
+            preview={false}
             height={"200px"}
             width={"100%"}
+            alt="Image"
             src="https://static.vecteezy.com/system/resources/previews/000/677/302/original/abstract-technology-banner-background.jpg"
           ></Image>
           <p
@@ -36,7 +38,7 @@ export default function PostDetail() {
             About us
           </p>
         </div>
-        <div style={{ marginTop: "100px", marginBottom: "50px", width: "80%", margin: "0 auto" }}>
+        <div style={{ marginTop: "100px", marginBottom: "50px", width: "80%", margin: "0 auto", padding: "80px 0" }}>
           <Tabs
             defaultActiveKey="1"
             tabBarStyle={{ display: "flex", justifyContent: "start" }}

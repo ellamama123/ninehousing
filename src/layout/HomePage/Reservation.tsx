@@ -48,7 +48,7 @@ export default function Reservation() {
       });
   };
   return (
-    <div className="container">
+    <div className="container reservation-home">
       <div
         style={{
           backgroundColor: "black",
@@ -58,12 +58,12 @@ export default function Reservation() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px 0",
+          padding: "50px 0",
           paddingBottom: "0",
           marginTop: "50px",
         }}
       >
-        <h2>Make a reservation</h2>
+        <h2 className="reservation-title">Make a reservation</h2>
         <Form
           {...layout}
           name="nest-messages"
@@ -76,8 +76,8 @@ export default function Reservation() {
           validateMessages={validateMessages}
         >
           <Row>
-            <Col span={8}>
-              <Form.Item name={["Name"]} rules={[{ required: true }]}>
+            <Col span={24} lg={8}>
+              <Form.Item name={["Name"]} rules={[{ required: true }]} labelCol={{ span: 24 }}>
                 <Input
                   style={{ width: "100%" }}
                   placeholder="Your Name"
@@ -85,17 +85,17 @@ export default function Reservation() {
                 />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={24} lg={8}>
               <Form.Item name={"Email"} rules={[{ type: "email" }]}>
                 <Input style={{ width: "100%" }} placeholder="Your Email" />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={24} lg={8}>
               <Form.Item name={["Phone"]} rules={[{ required: true }]}>
-                <Input style={{ width: "310px" }} placeholder="Your Phone" />
+                <Input style={{ width: "100%" }} placeholder="Your Phone" />
               </Form.Item>
             </Col>{" "}
-            <Col span={8}>
+            <Col span={24} lg={8}>
               <Form.Item name={["location"]} rules={[{ required: true }]}>
                 <Select
                   defaultValue=""
@@ -108,7 +108,7 @@ export default function Reservation() {
                 />
               </Form.Item>
             </Col>{" "}
-            <Col span={8}>
+            <Col span={24} lg={8}>
               <Form.Item name={["type"]} rules={[{ required: true }]}>
                 <Select
                   defaultValue=""
@@ -121,7 +121,7 @@ export default function Reservation() {
                 />
               </Form.Item>
             </Col>{" "}
-            <Col span={8}>
+            <Col span={24} lg={8}>
               <Form.Item name={["bedroom"]} rules={[{ required: true }]}>
                 <Select
                   defaultValue=""
@@ -134,29 +134,35 @@ export default function Reservation() {
                 />
               </Form.Item>
             </Col>{" "}
-            <Col span={8}>
+            <Col span={24}>
+              <Row style={{justifyContent: 'center'}}>
+              <Col span={24} lg={8}>
               <Form.Item name={["bathroom"]} rules={[{ required: true }]}>
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
                   options={[
-                    { value: "", label: "Bathroom" },
+                   { value: "", label: "Bathroom" },
                     { value: "1", label: "1" },
                     { value: "2", label: "2" },
                   ]}
                 />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={12} lg={3}>
               <Form.Item name={["Min Price"]} rules={[{ required: true }]}>
                 <InputNumber min={1} defaultValue={3} />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={12} lg={3}>
               <Form.Item name={["Max Price"]} rules={[{ required: true }]}>
                 <InputNumber min={1} defaultValue={3} />
               </Form.Item>
             </Col>
+              </Row>
+            
+            </Col>
+
           </Row>
 
           <Form.Item
@@ -168,7 +174,9 @@ export default function Reservation() {
                 backgroundColor: "#DEB25F",
                 color: "white",
                 width: "310px",
+                marginTop: "30px"
               }}
+              className="submit-reservation"
               htmlType="submit"
             >
               Send Us

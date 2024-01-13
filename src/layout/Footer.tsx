@@ -19,6 +19,7 @@ const Footer = () => {
                   style={{
                     display: "flex",
                     alignItems: "center",
+                    paddingLeft: "10px"
                   }}
                 >
                   <p style={{ fontSize: "24px", fontWeight: "600" }}>
@@ -28,8 +29,8 @@ const Footer = () => {
               </Row>
               <div style={{ marginTop: "50px" }}>
                 <Row>
-                  <Col span={16}>
-                    <Row>
+                  <Col lg={16} span={24}>
+                    <Row style={{flexWrap: 'nowrap'}}>
                       <Col>
                         <svg
                           width="20"
@@ -98,7 +99,7 @@ const Footer = () => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col span={8}>
+                  <Col lg={8} span={24} className="footer-navigate">
                     <Col span={24}>
                       <div>
                         <p>
@@ -110,7 +111,7 @@ const Footer = () => {
                         </p>
                         <p style={{ marginTop: "15px" }}>
                           {" "}
-                          <Link href="/blog"> Blog </Link>
+                          <Link href="/post"> Blog </Link>
                         </p>
                       </div>
                     </Col>

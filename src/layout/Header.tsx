@@ -23,8 +23,8 @@ const content = () => {
   mode="inline"
   overflowedIndicator={<MenuOutlined />}
 >
-  <Menu.Item key="/">
-    {/* <Link href="/"> <p>Home</p> </Link> */}
+  <Menu.Item key="">
+    <Link href="/"> Home </Link>
   </Menu.Item>
   <Menu.Item key="/product">
     <Link href="/product"> Our Product </Link>
@@ -72,12 +72,11 @@ const Header = () => {
       <div className="container">
         <Row style={{ display: "flex", alignItems: 'center'}}> 
           <Col span={12}>
-            <Row>
-              <Col span={4}>
+            <Row className="menu-desktop">
+              <Col span={1}>
               <Popover content={content} title="">
                   <div style={{color:"white", cursor: "pointer", fontSize: '24px'}}>
                     <MenuOutlined />
-                    <span style={{marginLeft: '10px', fontSize: '18px'}}>MENU</span>
                   </div>
                 </Popover>
               </Col>
@@ -109,7 +108,7 @@ const Header = () => {
           </Col>
         </Row>
       </div>
-      <>
+      
         <Button
           className={styles.menubtn}
           shape="circle"
@@ -117,7 +116,7 @@ const Header = () => {
           onClick={showDrawer}
         ></Button>
         <Drawer placement="right" onClose={onClose} visible={visible}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column", }}>
             <Button type="text" href="/">
             Home
             </Button>
@@ -134,7 +133,7 @@ const Header = () => {
             <Button type="text" href="/about-us">
               About us
             </Button>
-            <div style={{ marginTop: '20px', display: "flex", alignItems: "center" }}>
+            <div style={{ marginTop: '20px', display: "flex", alignItems: "center",  justifyContent: "center" }}>
               <Select
                 defaultValue="Tiếng Việt"
                 style={{ width: 120 }}
@@ -143,7 +142,7 @@ const Header = () => {
             </div>
           </div>
         </Drawer>
-      </>
+      
     </div>
   );
 };

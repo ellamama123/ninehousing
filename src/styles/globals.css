@@ -124,7 +124,7 @@ a {
   content: '' !important;
 }
 
-.ant-select-selection-item, .ant-select-arrow {
+.menu .ant-select-selection-item,.menu .ant-select-arrow {
   color: #deb25f !important;
 }
 
@@ -140,6 +140,7 @@ a {
   z-index: 100;
   width: 100%;
   box-shadow: 0 11px 30px 0 rgba(51,51,51,.15)!important;
+  transition: 0.2s;
 }
 
 .menu.scrolled-menu {
@@ -254,7 +255,8 @@ label.ant-radio-wrapper {
 /** SLIDE IMAGE **/
 .slick-prev {
   z-index: 100 !important;
-  inset-inline-start: none !important;
+  inset-inline-start: unset !important;
+  margin-left: 2%;
 }
 .slide-image-wrap {
   position: relative;
@@ -409,7 +411,7 @@ span.ant-btn-icon {
 }
 
 .customer .slick-prev {
-  left: -10%;
+  margin-left: -10%;
 }
 /** ACTIVITY **/
 .activity {
@@ -439,7 +441,7 @@ span.ant-btn-icon {
   z-index: 99 !important;
 }
 .partner-wrap .slick-prev {
-  left: -15%;
+  margin-left: -15%;
 }
 
 .partner-wrap  .slick-next {
@@ -502,6 +504,7 @@ span.ant-btn-icon {
   display: flex;
   flex-direction: column;
   font-size: 30px;
+  z-index: 99;
 }
 
 .phone-icon, .mail-icon {
@@ -510,6 +513,45 @@ span.ant-btn-icon {
   border-radius: 10px;
   margin-top: 10px;
   cursor: pointer
+}
+
+/* .container.reservation-home {
+  padding: 50px 0
+} */
+.reservation-title {
+  font-family: math;
+  font-size: 40px;
+  text-align:center;
+}
+
+.container.reservation-home .ant-col-16 {
+  max-width: 95%;
+}
+
+.reservation-product .ant-col-16 {
+  max-width: 100%;
+}
+
+.reservation-product .ant-input-number {
+  width: 100%
+}
+
+.reservation-wrap {
+  justify-content: center;
+}
+
+.container.reservation-home input {
+  border-radius: unset;
+  padding: 10px 25px;
+}
+
+.container.reservation-home .ant-select-selector {
+  border-radius: unset;
+  padding: 10px 25px;
+}
+
+.container.reservation-home .ant-select {
+  height: 44px;
 }
 
 /** RESPONSIVE MOBILE **/
@@ -526,7 +568,7 @@ span.ant-btn-icon {
     bottom: 18% !important;
   }
   /** PRODUCT **/
-  .search-date, .search-button {
+  .search-date, .search-button, .search-name {
     margin-top: 20px;
     justify-content: flex-start !important;
   }
@@ -681,5 +723,38 @@ span.ant-btn-icon {
   .partner-wrap .slick-track {
     display: flex;
     gap: 1rem;
+  }
+
+  .menu-desktop {
+    display: none;
+  }
+
+  .slick-next {
+    left: 88%
+  }
+
+  .container-customer .slick-next, .container-customer .slick-next {
+    top: -9%;
+  }
+
+  .customer-title {
+    margin-bottom: 85px;
+  }
+
+  .partner-wrap .slick-next {
+    left: 103%;
+  }
+
+  .scroll-to-top {
+    bottom: 6%;
+    right: 1%;
+  }
+
+  .submit-reservation {
+    width: 100% !important;
+  }
+
+  .footer-navigate {
+    margin-top: 50px;
   }
 }

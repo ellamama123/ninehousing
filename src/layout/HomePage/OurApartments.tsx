@@ -19,7 +19,8 @@ const OurApartments: React.FC = () => (
                   <Image
                     width={"100%"}
                     height={"75%"}
-                    src="http://localhost:3000/image/related_properties.png"
+                    alt="Image"
+                    src='/image/related_properties.png'
                   />
                   <div
                     style={{

@@ -74,7 +74,7 @@ export default function Home() {
         <title>Room | Nine Housing</title>
       </Head>
       <Layout>
-        <div style={{ margin: "30px 0 50px 0" }}>
+        <div style={{ margin: "150px 0 50px 0" }}>
           <div
             style={{
               width: "80%",

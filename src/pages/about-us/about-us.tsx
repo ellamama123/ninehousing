@@ -5,7 +5,7 @@ const { TabPane } = Tabs;
 
 export default function AboutUs() {
   return (
-    <div style={{width: '80%', margin: '0 auto'}}>
+    <div style={{width: '80%', margin: '0 auto', }}>
       <p>
         Toan Tien Housing build, lease, and operate serviced apartments in the
         most livable neighborhoods of Hanois heart districts. The company has

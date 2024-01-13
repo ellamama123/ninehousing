@@ -317,6 +317,7 @@ export default function ProductDetail() {
                   </div>
                 </Col>
                 <Col
+                  className="reservation-wrap"
                   lg={10}
                   span={24}
                   style={{
@@ -326,6 +327,7 @@ export default function ProductDetail() {
                   }}
                 >
                   <div
+                    className="reservation-product"
                     style={{
                       backgroundColor: "black",
                       color: "white",
