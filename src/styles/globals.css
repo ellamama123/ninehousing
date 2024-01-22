@@ -143,9 +143,10 @@ a {
   transition: 0.2s;
 }
 
-.menu.scrolled-menu {
+.menu.scrolled-menu, .menu.product {
   background: black;
 }
+
 
 .ant-menu.ant-menu-root.ant-menu-horizontal {
   border-bottom: 0px !important;

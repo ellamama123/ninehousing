@@ -8,7 +8,7 @@ import ScrollToTop from './ScrollToTop';
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <Header />
+      <Header  />
       <main>{children}</main>
       <Footer />
       <Contact />

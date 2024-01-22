@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import Image from 'next/image'
+import {useRouter} from 'next/router'; 
+
 import {
   Menu,
   Popover,
@@ -13,7 +14,6 @@ import {
 import { MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import { useRouter } from "next/router";
 
 const content = () => {
 
@@ -43,6 +43,8 @@ const Header = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
+  const router = useRouter() 
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 200) {
@@ -68,7 +70,7 @@ const Header = () => {
   };
 
   return (
-    <div className={`menu ${scrolled ? 'scrolled-menu' : ''}`}>
+    <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname == "/product" ? ' product' : '' }`}>
       <div className="container">
         <Row style={{ display: "flex", alignItems: 'center'}}> 
           <Col span={12}>
