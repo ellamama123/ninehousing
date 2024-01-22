@@ -93,7 +93,8 @@ export default function ProductDetail() {
                       <Image
                         className="product-image-big"
                         width={"100%"}
-                        src="http://localhost:3000/image/product-1.png"
+                        alt=""
+                        src="/image/product-1.png"
                       />
                     </Col>
                   </Col>
@@ -113,7 +114,8 @@ export default function ProductDetail() {
                             <Image
                               className="product-image-small"
                               width={"100%"}
-                              src="http://localhost:3000/image/product-1.png"
+                              alt=""
+                              src="/image/product-1.png"
                             />
                           </div>
                         </Col>
@@ -464,7 +466,7 @@ export default function ProductDetail() {
                             alt="test"
                             width={"100%"}
                             height={"75%"}
-                            src="http://localhost:3000/image/related_properties.png"
+                            src="/image/related_properties.png"
                           />
                           <div
                             style={{

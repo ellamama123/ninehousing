@@ -41,7 +41,7 @@ export default function Contact() {
     <>
       {contextHolder}
       <h1 className="contact-location-title" style={{ margin: '30px 0', fontSize: '48px' }}>Location map</h1>
-      <Image width={"100%"} src="http://localhost:3000/image/contact.png" />
+        <iframe src="https://www.google.com/maps/d/u/3/embed?mid=1YT1gyB8JWMM23tRdHdIHrz3AkBl99Ss&ehbc=2E312F" width="100%" height="500px"></iframe>
       <div style={{ marginTop: '50px'}}>
         <h1 className="contact-title" style={{ fontSize: '48px', width: '50%' }}>Get in touch with us by filling contact from below</h1>
         <div style={{ marginTop: '30px' }}>

@@ -6,9 +6,9 @@ const InteractiveMap: React.FC = () => (
     <div className="container">
       <Row>
         <Col lg={12} span={24}>
-          <Image src="/image/product-1.png"></Image>
+          <Image src="/image/product-1.png" alt=""></Image>
         </Col>
-        <Col lg={12} span={24}>
+        <Col lg={12} span={24} style={{paddingLeft: '10px'}}>
           <p className="wcu-title">Interactive map</p>
           <p>The apartment buildings of XX</p>
 

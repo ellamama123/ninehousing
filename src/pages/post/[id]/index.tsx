@@ -93,7 +93,7 @@ export default function PostDetail() {
                       alt="image"
                       width={"100%"}
                       height={"75%"}
-                      src="http://localhost:3000/image/related_properties.png"
+                      src="/image/related_properties.png"
                     />
                     <div
                       style={{
@@ -112,7 +112,8 @@ export default function PostDetail() {
                     <Image
                       width={"100%"}
                       height={"75%"}
-                      src="http://localhost:3000/image/related_properties.png"
+                      alt=""
+                      src="/image/related_properties.png"
                     />
                     <div
                       style={{
