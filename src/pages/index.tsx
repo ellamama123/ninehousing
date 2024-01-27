@@ -41,7 +41,7 @@ export default function Home() {
         <link rel="icon" href="/image/logo.png" />
       </Head>
       <Layout> 
-        <MainCarousel slide={slide} />
+        <MainCarousel />
         <DivOne />
         <WhyChooseUs />
         <OurApartments home={home} />
