@@ -374,7 +374,6 @@ export default function ProductDetail() {
                       </Form.Item>
                       <Form.Item name={["type"]}>
                         <Select
-                          defaultValue=""
                           defaultValue={{ value: "0", label: "Property Type" }}
                           options={[
                             { value: "0", label: "Property Type" },
