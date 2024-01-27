@@ -215,7 +215,7 @@ export default function Home() {
                       </Row>
                     </div>
                     {product &&
-                      product.map((prd: {thumbnail: any, description: any, images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any}, index: any) => (
+                      product.map((prd: any, index: any) => (
                         <Row
                           key={index}
                           style={{ marginTop: 20, backgroundColor: "#F1F1F1" }}
