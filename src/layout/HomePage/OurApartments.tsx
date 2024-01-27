@@ -4,12 +4,6 @@ interface OurApartmentsProps {
   home: Array<any>; // Change `any` to the actual type of your items in the array
 }
 
-const truncateText = (originalText, maxLength, replacement = '...') => {
-  return originalText.length > maxLength
-    ? originalText.slice(0, maxLength) + replacement
-    : originalText;
-};
-
 const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
   <div className="oap-wrap">
     <div className="container">
