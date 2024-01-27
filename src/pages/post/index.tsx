@@ -36,7 +36,7 @@ export default function Post() {
     setPageIndex(page);
   };
 
-  const convertDateString = (originalDateString) => {
+  const convertDateString = (originalDateString: any) => {
     const originalDate = new Date(originalDateString);  
     const day = originalDate.getDate();
     const monthIndex = originalDate.getMonth();
