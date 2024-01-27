@@ -24,7 +24,7 @@ const validateMessages = {
 
 export default function ProductDetail() {
   const router = useRouter();
-  const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any}>();
+  const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any, view_count: any}>();
   const [email, setEmail] = useState<string>();
   const [messageApi, contextHolder] = message.useMessage();
 
