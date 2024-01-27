@@ -70,7 +70,7 @@ const Header = () => {
   };
 
   return (
-    <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname == "/product" ? ' product' : '' }`}>
+    <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname !== "/" ? ' product' : '' }`}>
       <div className="container">
         <Row style={{ display: "flex", alignItems: 'center'}}> 
           <Col span={12}>
@@ -85,9 +85,9 @@ const Header = () => {
             </Row>
           </Col>
           <Col span={3}>
-            <Link href="/">  
-              <div>
-              <Image src="/image/logo.png" alt="Logo" preview={false} />
+            <Link href="/" >  
+              <div style={{cursor: 'pointer'}}>
+                <Image src="/image/logo.png" alt="Logo" preview={false} />
               </div>
             </Link>
           </Col>

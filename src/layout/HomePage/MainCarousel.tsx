@@ -11,9 +11,9 @@ const contentStyle: React.CSSProperties = {
   background: "#364d79",
 };
 
-const MainCarousel: React.FC = () => {
+const MainCarousel: React.FC = (slide: any) => {
   const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
+    console.log(slide);
   };
 
   return (

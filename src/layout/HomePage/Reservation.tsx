@@ -91,12 +91,12 @@ export default function Reservation() {
               </Form.Item>
             </Col>
             <Col span={24} lg={8}>
-              <Form.Item name={["Phone"]} rules={[{ required: true }]}>
+              <Form.Item name={["Phone"]}>
                 <Input style={{ width: "100%" }} placeholder="Your Phone" />
               </Form.Item>
-            </Col>{" "}
+            </Col>
             <Col span={24} lg={8}>
-              <Form.Item name={["location"]} rules={[{ required: true }]}>
+              <Form.Item name={["location"]}>
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
@@ -107,22 +107,24 @@ export default function Reservation() {
                   ]}
                 />
               </Form.Item>
-            </Col>{" "}
+            </Col>
             <Col span={24} lg={8}>
-              <Form.Item name={["type"]} rules={[{ required: true }]}>
+              <Form.Item name={["type"]}>
                 <Select
-                  defaultValue=""
                   style={{ width: "100%" }}
+                  defaultValue={{ value: "0", label: "Property Type" }}
                   options={[
-                    { value: "", label: "Property Type" },
-                    { value: "lucy", label: "Lucy" },
-                    { value: "Yiminghe", label: "yiminghe" },
+                    { value: "0", label: "Property Type" },
+                    { value: "1", label: "Apartments" },
+                    { value: "2", label: "Serviced Apartments" },
+                    { value: "3", label: "Houses" },
+                    { value: "4", label: "Villas" },
                   ]}
                 />
               </Form.Item>
-            </Col>{" "}
+            </Col>
             <Col span={24} lg={8}>
-              <Form.Item name={["bedroom"]} rules={[{ required: true }]}>
+              <Form.Item name={["bedroom"]}>
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
@@ -130,10 +132,12 @@ export default function Reservation() {
                     { value: "", label: "Bedroom" },
                     { value: "1", label: "1" },
                     { value: "2", label: "2" },
+                    { value: "3", label: "3" },
+                    { value: "4", label: "4" },
                   ]}
                 />
               </Form.Item>
-            </Col>{" "}
+            </Col>
             <Col span={24}>
               <Row style={{justifyContent: 'center'}}>
               <Col span={24} lg={8}>
@@ -150,12 +154,12 @@ export default function Reservation() {
               </Form.Item>
             </Col>
             <Col span={12} lg={3}>
-              <Form.Item name={["Min Price"]} rules={[{ required: true }]}>
+              <Form.Item name={["Min Price"]}>
                 <InputNumber min={1} defaultValue={3} />
               </Form.Item>
             </Col>
             <Col span={12} lg={3}>
-              <Form.Item name={["Max Price"]} rules={[{ required: true }]}>
+              <Form.Item name={["Max Price"]}>
                 <InputNumber min={1} defaultValue={3} />
               </Form.Item>
             </Col>
@@ -164,7 +168,6 @@ export default function Reservation() {
             </Col>
 
           </Row>
-
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}
             style={{ width: "100%", display: 'flex', justifyContent: 'center' }}

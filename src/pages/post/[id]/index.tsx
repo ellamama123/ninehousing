@@ -4,15 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../../../layout/Layout";
-
+import Link from "next/link";
 
 export default function PostDetail() {
   interface Post {
     title: any,
-    content: any
+    content: any,
+    related_blogs: any
   }
   const router = useRouter();
-  const [post, setPost] = useState<{title: any, content: any}>();
+  const [post, setPost] = useState<{title: any, content: any, related_blogs: any}>();
 
   useEffect(() => {
     let id = router.query.id;
@@ -22,7 +23,6 @@ export default function PostDetail() {
         .get("https://web-developing.site/api/blogs/" + id)
         .then((response) => {
           setPost(response.data);
-          // console.log('121', response);
         });
     }
   }, [router.query.id]);
@@ -38,6 +38,7 @@ export default function PostDetail() {
             alt="image"
             height={"200px"}
             width={"100%"}
+            preview={false}
             src="https://static.vecteezy.com/system/resources/previews/000/677/302/original/abstract-technology-banner-background.jpg"
           ></Image>
           <p
@@ -88,46 +89,42 @@ export default function PostDetail() {
                   >
                     Related blog posts
                   </p>
-                  <div style={{ marginBottom: "30px" }}>
-                    <Image
-                      alt="image"
-                      width={"100%"}
-                      height={"75%"}
-                      src="/image/related_properties.png"
-                    />
-                    <div
-                      style={{
-                        backgroundColor: "#DEB25F",
-                        padding: 20,
-                        borderEndStartRadius: "10px",
-                        borderBottomRightRadius: "10px",
-                      }}
-                    >
-                      <p>
-                        HAVING PETS IN A TOAN TIEN APARTMENT (FT. THE PETS...
-                      </p>
-                    </div>
-                  </div>
-                  <div style={{ marginBottom: "30px" }}>
-                    <Image
-                      width={"100%"}
-                      height={"75%"}
-                      alt=""
-                      src="/image/related_properties.png"
-                    />
-                    <div
-                      style={{
-                        backgroundColor: "#DEB25F",
-                        padding: 20,
-                        borderEndStartRadius: "10px",
-                        borderBottomRightRadius: "10px",
-                      }}
-                    >
-                      <p>
-                        HAVING PETS IN A TOAN TIEN APARTMENT (FT. THE PETS...
-                      </p>
-                    </div>
-                  </div>
+                  {
+                    post?.related_blogs.slice(-2).map((blog: any , index: any) => (
+                        <div style={{ marginBottom: "30px" }} key={index}>
+                          <Link
+                            href={window.location.origin + "/post/" + blog?.id}
+                            title=""
+                          >
+                            <div style={{cursor: 'pointer'}}>
+                        <Image
+                          alt="image"
+                          width={"100%"}
+                          preview={false}
+                          style={{
+                            aspectRatio: '3 / 2', 
+                            objectFit: 'cover'
+                          }} 
+                          src={blog.thumbnail}
+                        />
+                        <div
+                          style={{
+                            backgroundColor: "#DEB25F",
+                            padding: 20,
+                            borderEndStartRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                          }}
+                        >
+                          <p>
+                            {blog.title}
+                          </p>
+                        </div>
+                        </div>
+                        </Link>
+                      </div>
+                    ))
+                  }
+                  
                 </div>
               </Col>
             </Row>

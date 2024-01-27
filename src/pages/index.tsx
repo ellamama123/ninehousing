@@ -9,8 +9,29 @@ import CustomerSay from '@/layout/HomePage/CustomerSay';
 import Reservation from '@/layout/HomePage/Reservation';
 import Activity from '@/layout/HomePage/Actitvity';
 import Partner from '@/layout/HomePage/Partner';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
+  const [slide, setSlide] = useState([]);
+  const [blog, setBlog] = useState([]);
+  const [home, setHome] = useState([]);
+
+  const getProduct = () => {
+    axios
+      .get("https://web-developing.site/api/home")
+      .then((response) => {
+        // setSlide(response.data.data.meta-info);
+        setHome(response.data.rooms);
+        setBlog(response.data.blogs);
+        
+      });
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
   return (
     <>
       <Head>
@@ -20,14 +41,14 @@ export default function Home() {
         <link rel="icon" href="/image/logo.png" />
       </Head>
       <Layout> 
-        <MainCarousel />
+        <MainCarousel slide={slide} />
         <DivOne />
         <WhyChooseUs />
-        <OurApartments />
+        <OurApartments home={home} />
         <Reservation />
         <InteractiveMap />
         <CustomerSay />
-        <Activity />
+        <Activity blog={blog} />
         <Partner />
       </Layout>
     </>

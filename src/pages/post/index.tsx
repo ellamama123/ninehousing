@@ -36,6 +36,25 @@ export default function Post() {
     setPageIndex(page);
   };
 
+  const convertDateString = (originalDateString) => {
+    const originalDate = new Date(originalDateString);  
+    const day = originalDate.getDate();
+    const monthIndex = originalDate.getMonth();
+    const year = originalDate.getFullYear();
+    const hours = originalDate.getHours();
+    const minutes = originalDate.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+    const monthNames = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    const month = monthNames[monthIndex];
+    const convertedDateString = `${day} ${month} ${year} ${hours}:${minutes} ${ampm}`;
+  
+    return convertedDateString;
+  }
+
   return (
     <>
       <Head>
@@ -47,6 +66,7 @@ export default function Post() {
             alt="image"
             height={"200px"}
             width={"100%"}
+            preview={false}
             src="https://static.vecteezy.com/system/resources/previews/000/677/302/original/abstract-technology-banner-background.jpg"
           ></Image>
           <p
@@ -70,7 +90,14 @@ export default function Post() {
               post.map((data, index) => (
                 <Col lg={8} span={24} key={index} className="post-wrap">
                   <div>
-                    <Image alt="image" width={"100%"} height={"75%"} src={data?.thumbnail} />
+                    <Image alt="image" width={"100%"}                           
+                      style={{
+                        aspectRatio: '3 / 2', 
+                        objectFit: 'cover'
+                      }}  
+                      src={data?.thumbnail} 
+                      preview={false}
+                    />
                   </div>
                   <div style={{}}>
                     <div>
@@ -107,7 +134,7 @@ export default function Post() {
                             marginTop: "15px",
                           }}
                         >
-                          06 Mar 2017 03:55 AP
+                          { convertDateString(data?.created_at) }
                         </p>
                         <Button
                           style={{

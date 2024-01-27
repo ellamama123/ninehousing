@@ -6,14 +6,6 @@ import axios from "axios";
 import Head from "next/head";
 import Layout from "../../../layout/Layout";
 
-const images = [
-  "https://via.placeholder.com/150", // Image1
-  "https://via.placeholder.com/150", // Image2
-  "https://via.placeholder.com/150", // Image3
-  "https://via.placeholder.com/150", // Image4
-  "https://via.placeholder.com/150", // Image5
-];
-
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -32,7 +24,7 @@ const validateMessages = {
 
 export default function ProductDetail() {
   const router = useRouter();
-  const [product, setProduct] = useState<{name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any}>();
+  const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any}>();
   const [email, setEmail] = useState<string>();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -49,6 +41,7 @@ export default function ProductDetail() {
   }, [router.query.id]);
 
   const onFinish = (values: any) => {
+    console.log('333');
     let id = router.query.id;
     axios
       .post("https://web-developing.site/api/reservations", {
@@ -94,28 +87,22 @@ export default function ProductDetail() {
                         className="product-image-big"
                         width={"100%"}
                         alt=""
-                        src="/image/product-1.png"
+                        src={product?.images[0]}
                       />
                     </Col>
                   </Col>
                   <Col lg={12} span={24} className="product-image-small-wrap">
                     <Row>
-                      {[2, 3, 4, 5].map((index) => (
+                      {product?.images.slice(1, 5).map((image: any, index: any) => (
                         <Col span={12} key={index}>
                           <div
-                            className="image-small-wrap"
-                            style={{
-                              marginRight:
-                                index == 3 || index == 5 ? "0px" : "20px",
-                              paddingTop:
-                                index == 2 || index == 3 ? "0px" : "20px",
-                            }}
+                            className={`image-small-wrap ${index == 3 || index == 2 ? 'marginTop' : ''} ${index == 0 || index == 2 ? 'marginRight' : ''}`}
                           >
                             <Image
                               className="product-image-small"
                               width={"100%"}
                               alt=""
-                              src="/image/product-1.png"
+                              src={image}
                             />
                           </div>
                         </Col>
@@ -134,7 +121,7 @@ export default function ProductDetail() {
                       style={{ marginRight: "10px" }}
                       src={`/icon/eye.png`}
                     />
-                    <span>1550 Views</span>
+                    <span>{product?.view_count} Views</span>
                   </div>
                   <div>
                     <Row>
@@ -178,7 +165,7 @@ export default function ProductDetail() {
                       <Col span={24}>
                         <div style={{ marginTop: "50px" }}>
                           <h3 style={{ marginBottom: "20px" }}>Description</h3>
-                          <p>{product?.description}</p>
+                          <p dangerouslySetInnerHTML={{ __html: product?.description }} />
                         </div>
                       </Col>
                       <div style={{ marginTop: "50px" }}>
@@ -368,13 +355,13 @@ export default function ProductDetail() {
                           placeholder="Your Email"
                         />
                       </Form.Item>
-                      <Form.Item name={["Phone"]} rules={[{ required: true }]}>
+                      <Form.Item name={["Phone"]}>
                         <Input
                           style={{ width: "310px" }}
                           placeholder="Your Phone"
                         />
                       </Form.Item>
-                      <Form.Item name={["location"]} rules={[{ required: true }]}>
+                      <Form.Item name={["location"]}>
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
@@ -385,18 +372,20 @@ export default function ProductDetail() {
                           ]}
                         />
                       </Form.Item>
-                      <Form.Item name={["type"]} rules={[{ required: true }]}>
+                      <Form.Item name={["type"]}>
                         <Select
                           defaultValue=""
-                          style={{ width: "100%" }}
+                          defaultValue={{ value: "0", label: "Property Type" }}
                           options={[
-                            { value: '', label: 'Property Type' },
-                            { value: 'lucy', label: 'Lucy' },
-                            { value: 'Yiminghe', label: 'yiminghe' },
+                            { value: "0", label: "Property Type" },
+                            { value: "1", label: "Apartments" },
+                            { value: "2", label: "Serviced Apartments" },
+                            { value: "3", label: "Houses" },
+                            { value: "4", label: "Villas" },
                           ]}
                         />
                       </Form.Item>
-                      <Form.Item name={["bedroom"]} rules={[{ required: true }]}>
+                      <Form.Item name={["bedroom"]}>
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
@@ -407,7 +396,7 @@ export default function ProductDetail() {
                           ]}
                         />
                       </Form.Item>
-                      <Form.Item name={["bathroom"]} rules={[{ required: true }]}>
+                      <Form.Item name={["bathroom"]}>
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
@@ -418,10 +407,10 @@ export default function ProductDetail() {
                           ]}
                         />
                       </Form.Item>
-                      <Form.Item name={["Min Price"]} rules={[{ required: true }]}>
+                      <Form.Item name={["Min Price"]}>
                         <InputNumber min={1} defaultValue={3} />
                       </Form.Item>
-                      <Form.Item name={["Max Price"]} rules={[{ required: true }]}>
+                      <Form.Item name={["Max Price"]}>
                         <InputNumber min={1} defaultValue={3} />
                       </Form.Item>
                       <Form.Item
@@ -449,7 +438,7 @@ export default function ProductDetail() {
                 Related properties
               </h1>
               <Row>
-                {[0, 1, 2].map((index) => (
+                {product?.related_rooms.slice(0,3).map((prd: any, index: any) => (
                   <Col
                     className="related-product"
                     lg={8}
@@ -466,7 +455,7 @@ export default function ProductDetail() {
                             alt="test"
                             width={"100%"}
                             height={"75%"}
-                            src="/image/related_properties.png"
+                            src={prd.thumbnail}
                           />
                           <div
                             style={{
@@ -506,12 +495,12 @@ export default function ProductDetail() {
                                       fontWeight: "bold",
                                     }}
                                   >
-                                    301
+                                    {prd?.name}
                                   </p>
                                 </Col>
                                 <Col span={18}>
                                   <p>
-                                    15/41 Linh Lang Str, Ba Dinh Dist, Ha Noi
+                                    {prd?.address}
                                   </p>
                                 </Col>
                               </Row>
@@ -524,7 +513,7 @@ export default function ProductDetail() {
                                   }}
                                 >
                                   <img width={20} src={`/icon/bed.png`} />
-                                  <span>1 Br</span>
+                                  <span>{prd?.bathroom} Br</span>
                                 </Col>
                                 <Col
                                   span={8}
@@ -535,7 +524,7 @@ export default function ProductDetail() {
                                 >
                                   <img width={20} src={`/icon/water.png`} />
                                   <span style={{ marginLeft: "10px" }}>
-                                    1 Ba
+                                    {prd?.bedroom} Ba
                                   </span>
                                 </Col>
                                 <Col
@@ -549,7 +538,7 @@ export default function ProductDetail() {
                                     width={20}
                                     src={`/icon/square-Medical.png`}
                                   />
-                                  <span>55 Sq.Ft</span>
+                                  <span>{prd?.acreage} Sq.Ft</span>
                                 </Col>
                               </Row>
                             </div>
@@ -566,7 +555,7 @@ export default function ProductDetail() {
                                 }}
                               >
                                 <Col span={12}>
-                                  <h2>$500/Month</h2>
+                                  <h2>${prd?.price}/{prd?.unit}</h2>
                                 </Col>
                                 <Col
                                   span={12}
@@ -585,7 +574,7 @@ export default function ProductDetail() {
                                       padding: "7px 20px",
                                     }}
                                   >
-                                    Book now
+                                  Book now
                                   </Button>
                                 </Col>
                               </Row>

@@ -31,6 +31,8 @@ export default function Home() {
   const [name, setName] = useState("");
   const [sort, setSort] = useState("");
   const [perPage, setPerPage] = useState(0);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -54,6 +56,8 @@ export default function Home() {
           price: price,
           quickSearch: name,
           "sortDesc[]": sort,
+          startDate: startDate,
+          endDate: endDate
         },
       })
       .then((response) => {
@@ -67,6 +71,15 @@ export default function Home() {
   const onChange = (page: any) => {
     setPageIndex(page);
   };
+
+  const changeStartDate = (data: any) => {
+    setStartDate(data)
+  }
+
+  const changeEndDate = (data: any) => {
+    setEndDate(data)
+  }
+
 
   return (
     <div>
@@ -91,10 +104,9 @@ export default function Home() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </Col>
-              <Col lg={8} span={24} className="search-date">
+              <Col lg={9} span={24} className="search-date">
                 <DatePicker
-                  showTime
-                  onChange={onChange}
+                  onChange={changeStartDate}
                   style={{
                     width: 125,
                     padding: 15,
@@ -104,8 +116,7 @@ export default function Home() {
                   placeholder="Check in"
                 />
                 <DatePicker
-                  showTime
-                  onChange={onChange}
+                  onChange={changeEndDate}
                   style={{
                     width: 125,
                     padding: 15,
@@ -138,7 +149,7 @@ export default function Home() {
                 />
               </Col>
               <Col
-                lg={4}
+                lg={3}
                 span={24}
                 className="search-button"
                 style={{
@@ -183,6 +194,7 @@ export default function Home() {
                             backgroundColor: "#DEB25F",
                             width: 150,
                           }}
+                          onClick={getProduct}
                         >
                           Best match
                         </Button>
@@ -209,16 +221,16 @@ export default function Home() {
                           style={{ marginTop: 20, backgroundColor: "#F1F1F1" }}
                         >
                           <Col lg={6} span={24}>
-                            <img width={"100%"} src={`image/product.png`} />
+                            <img width={"100%"} style={{aspectRatio: '1/1', objectFit: 'cover'}} alt="" src={prd?.thumbnail} />
                           </Col>
                           <Col
                             lg={18}
                             span={24}
-                            style={{ paddingLeft: 20, paddingTop: 10 }}
+                            style={{ paddingLeft: 20, paddingTop: 10, paddingRight: 20 }}
                           >
                             <h1>{prd.name}</h1>
                             <p style={{ marginTop: 15 }}>{prd.address}</p>
-                            <p style={{ marginTop: 15 }}>{prd.description}</p>
+                            <p style={{ marginTop: 15 }} className="prd-des">{prd.description}</p>
                             <Row style={{ marginTop: 15 }}>
                               <Col
                                 lg={3}

@@ -14,11 +14,10 @@ const DivOne: React.FC = () => (
       <Row gutter={24}>
         <Col className="gutter-row" lg={8} span={24}>
           <div style={style}>
-            <p className="div-one-number"> +2000 </p>
+            <p className="div-one-number"> +30 </p>
             <p className="div-one-description">
               {" "}
-              Lorem ipsum dolor sit amet consectetur. Vulputate ac morbi nibh
-              donec malesuada. Et parturient amet congue tortor nibh.{" "}
+              Apartment{" "}
             </p>
           </div>
         </Col>
@@ -27,18 +26,17 @@ const DivOne: React.FC = () => (
             <p className="div-one-number"> +2000 </p>
             <p className="div-one-description">
               {" "}
-              Lorem ipsum dolor sit amet consectetur. Vulputate ac morbi nibh
-              donec malesuada. Et parturient amet congue tortor nibh.{" "}
+              Apartment Viewed
+              {" "}
             </p>
           </div>
         </Col>
         <Col className="gutter-row" lg={8} span={24}>
           <div style={style}>
-            <p className="div-one-number"> +2000 </p>
+            <p className="div-one-number"> +30 </p>
             <p className="div-one-description">
               {" "}
-              Lorem ipsum dolor sit amet consectetur. Vulputate ac morbi nibh
-              donec malesuada. Et parturient amet congue tortor nibh.{" "}
+              Booked{" "}
             </p>
           </div>
         </Col>

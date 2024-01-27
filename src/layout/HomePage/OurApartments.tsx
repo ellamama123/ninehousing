@@ -1,12 +1,21 @@
 import React from "react";
 import { Col, Button, Row, Image } from "antd";
+interface OurApartmentsProps {
+  home: Array<any>; // Change `any` to the actual type of your items in the array
+}
 
-const OurApartments: React.FC = () => (
+const truncateText = (originalText, maxLength, replacement = '...') => {
+  return originalText.length > maxLength
+    ? originalText.slice(0, maxLength) + replacement
+    : originalText;
+};
+
+const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
   <div className="oap-wrap">
     <div className="container">
       <p className="oap-title">Our apartments</p>
       <Row gutter={24}>
-        {[0, 1, 2].map((index) => (
+        {home.map((hom, index: number) => (
           <Col
             className="related-product"
             lg={8}
@@ -18,9 +27,12 @@ const OurApartments: React.FC = () => (
                 <div>
                   <Image
                     width={"100%"}
-                    height={"75%"}
+                    style={{
+                      aspectRatio: '3 / 2', 
+                      objectFit: 'cover'
+                    }}
                     alt="Image"
-                    src='/image/related_properties.png'
+                    src={hom.thumbnail}
                   />
                   <div
                     style={{
@@ -54,13 +66,13 @@ const OurApartments: React.FC = () => (
                           marginTop: "10px",
                         }}
                       >
-                        <Col span={6}>
-                          <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                            301
+                        <Col span={24}>
+                          <p style={{ fontSize: "20px", minHeight: '50px', fontWeight: "bold" }}>
+                            {hom.name}
                           </p>
                         </Col>
-                        <Col span={18}>
-                          <p>15/41 Linh Lang Str, Ba Dinh Dist, Ha Noi</p>
+                        <Col span={24}>
+                          <p style={{marginTop: '10px'}}>{hom.address}</p>
                         </Col>
                       </Row>
                       <Row style={{ marginTop: 25 }}>
@@ -69,21 +81,21 @@ const OurApartments: React.FC = () => (
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           <img width={20} src={`/icon/bed.png`} />
-                          <span>1 Br</span>
+                          <span>{hom.bedroom} Br</span>
                         </Col>
                         <Col
                           span={8}
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           <img width={20} src={`/icon/water.png`} />
-                          <span style={{ marginLeft: "10px" }}>1 Ba</span>
+                          <span style={{ marginLeft: "10px" }}>{hom.bathroom} Ba</span>
                         </Col>
                         <Col
                           span={8}
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           <img width={20} src={`/icon/square-Medical.png`} />
-                          <span>55 Sq.Ft</span>
+                          <span>{hom.acreage} Sq.Ft</span>
                         </Col>
                       </Row>
                     </div>
@@ -95,7 +107,7 @@ const OurApartments: React.FC = () => (
                     >
                       <Row style={{ display: "flex", alignItems: "center" }}>
                         <Col span={12}>
-                          <h2>$500/Month</h2>
+                          <h2>${hom.price}/{hom.unit}</h2>
                         </Col>
                         <Col
                           span={12}
