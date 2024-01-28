@@ -43,7 +43,7 @@ const MainCarousel: React.FC<MailCarouselProps> = ({slide}) => {
     >
       {
         slide?.map((data, index) => (
-          <div>
+          <div key={index}>
             <div className="slide-image-wrap">
               <Image
                 className="slide-image"
