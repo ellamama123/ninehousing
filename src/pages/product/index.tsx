@@ -25,6 +25,11 @@ const optionPrice = [
   { label: "200$ & above ", value: "GretherThan200" },
 ];
 
+interface District {
+  code: string;
+  name: string;
+}
+
 export default function Home() {
   const [product, setProduct] = useState<{id: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any}[]>([]);
   const [price, setPrice] = useState(null);
@@ -36,7 +41,7 @@ export default function Home() {
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [roomLocation, setRoomLocation] = useState<any>("");
-  const [districts, setDistricts] = useState<any>();
+  const [districts, setDistricts] = useState<District[]>();
 
   useEffect(() => {
     getProduct();

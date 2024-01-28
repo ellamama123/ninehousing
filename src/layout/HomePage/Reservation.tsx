@@ -29,10 +29,16 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
+
+interface District {
+  code: string;
+  name: string;
+}
+
 export default function Reservation() {
   const [messageApi, contextHolder] = message.useMessage();
   const [email, setEmail] = useState<string>();
-  const [districts, setDistricts] = useState<any>();
+  const [districts, setDistricts] = useState<District[]>();
   const [roomType, setRoomType] = useState<any>();
   const [roomLocation, setRoomLocation] = useState<any>();
   const [bedroom, setBedroom] = useState<any>();

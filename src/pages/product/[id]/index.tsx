@@ -22,6 +22,11 @@ const validateMessages = {
   },
 };
 
+interface District {
+  code: string;
+  name: string;
+}
+
 export default function ProductDetail() {
   const router = useRouter();
   const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any, view_count: any}>();
@@ -31,7 +36,7 @@ export default function ProductDetail() {
   const [roomLocation, setRoomLocation] = useState<any>();
   const [bedroom, setBedroom] = useState<any>();
   const [bathroom, setBathroom] = useState<any>();
-  const [districts, setDistricts] = useState<any>();
+  const [districts, setDistricts] = useState<District[]>();
 
   useEffect(() => {
     let id = router.query.id;
