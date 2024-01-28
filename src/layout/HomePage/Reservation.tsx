@@ -68,7 +68,7 @@ export default function Reservation() {
   useEffect(() => {
     axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
       .then((response: any) => {
-        let districtList: any = response.data.districts;
+        let districtList: District = response.data.districts;
         setDistricts([
           ...districtList?.map(district => ({ value: district.code, label: district.name }))
         ])
