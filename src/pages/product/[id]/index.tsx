@@ -53,7 +53,7 @@ export default function ProductDetail() {
   useEffect(() => {
     axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
     .then((response: any) => {
-      let districtList: District = response.data.districts;
+      let districtList: District[] = response.data.districts;
       setDistricts([
         ...districtList?.map(district => ({ value: district.code, label: district.name }))
       ])
