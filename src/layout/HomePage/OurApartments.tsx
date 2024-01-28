@@ -1,5 +1,7 @@
 import React from "react";
 import { Col, Button, Row, Image } from "antd";
+import Link from "next/link";
+
 interface OurApartmentsProps {
   home: Array<any>; // Change `any` to the actual type of your items in the array
 }
@@ -110,6 +112,14 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
                             justifyContent: "flex-end",
                           }}
                         >
+                        <Link
+                          href={
+                            window.location.origin +
+                            "/product/" +
+                            hom.id
+                          }
+                          title=""
+                        >
                           <Button
                             type="primary"
                             style={{
@@ -122,6 +132,7 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
                           >
                             Book now
                           </Button>
+                          </Link>
                         </Col>
                       </Row>
                     </div>
