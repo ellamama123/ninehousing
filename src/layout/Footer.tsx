@@ -50,7 +50,7 @@ const Footer = () => {
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
                         <span>
-                          No.11 Ton That Thiep Str., Ba Dinh Dist, Ha Noi
+                          No 34/12 Dao Tan, Ba Dinh Dist, Ha Noi, Viet Nam
                         </span>
                       </Col>
                     </Row>
@@ -73,7 +73,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <span>Namtoong@gmail.com</span>
+                        <span>ninehousing99@mail.com</span>
                       </Col>
                     </Row>
                     <Row style={{ marginTop: "25px" }}>
@@ -95,7 +95,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <span>0918374230</span>
+                        <span>0968.071.393</span>
                       </Col>
                     </Row>
                   </Col>

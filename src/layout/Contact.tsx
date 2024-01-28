@@ -5,12 +5,12 @@ export default function Contact() {
   return (
     <div className="contact">
         <div className="phone-icon">
-          <a href="tel:0918374230">
+          <a href="tel:0968071393">
             <PhoneOutlined />
           </a>
         </div>
         <div className="mail-icon">
-          <a href="mailto:Namtoong@gmail.com">
+          <a href="mailto:ninehousing99@mail.com">
             <MailOutlined />
           </a>
         </div>
