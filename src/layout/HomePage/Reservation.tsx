@@ -32,23 +32,42 @@ const validateMessages = {
 export default function Reservation() {
   const [messageApi, contextHolder] = message.useMessage();
   const [email, setEmail] = useState<string>();
+  const [districts, setDistricts] = useState<string>();
+  const [roomType, setRoomType] = useState<any>();
+  const [roomLocation, setRoomLocation] = useState<any>();
+  const [bedroom, setBedroom] = useState<any>();
+  const [bathroom, setBathroom] = useState<any>();
 
   const onFinish = (values: any) => {
-
     axios
       .post("https://web-developing.site/api/reservations", {
         name: values.Name,
         email: values.Email,
         phone: values.Phone,
+        min_price: values.min_price,
+        max_price: values.max_price,
+        district: roomLocation,
+        room_type: roomType,
+        bedroom: bedroom,
+        bathroom: bathroom,
       })
       .then((response) => {
         messageApi.success("Room reservation request has been sent.", 1);
       })
       .catch((error) => {
-        console.log('2121');
         messageApi.error(error.response.data.message, 1);
       });
   };
+
+  useEffect(() => {
+    axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
+      .then((response: any) => {
+        let districtList: any = response.data.districts;
+        setDistricts([
+          ...districtList?.map(district => ({ value: district.code, label: district.name }))
+        ])
+      })
+  },[])
   return (
     <div className="container reservation-home">
       {contextHolder}
@@ -101,13 +120,12 @@ export default function Reservation() {
             <Col span={24} lg={8}>
               <Form.Item name={["location"]}>
                 <Select
-                  defaultValue=""
+                  placeholder="Property Location"
+                  onChange={value => {
+                    setRoomLocation(value)
+                  }}
                   style={{ width: "100%" }}
-                  options={[
-                    { value: "", label: "Property Location" },
-                    { value: "lucy", label: "Lucy" },
-                    { value: "Yiminghe", label: "yiminghe" },
-                  ]}
+                  options={districts}
                 />
               </Form.Item>
             </Col>
@@ -115,7 +133,10 @@ export default function Reservation() {
               <Form.Item name={["type"]}>
                 <Select
                   style={{ width: "100%" }}
-                  defaultValue={{ value: "0", label: "Property Type" }}
+                  placeholder="Property Type"
+                  onChange={value => {
+                    setRoomType(value)
+                  }}
                   options={[
                     { value: "0", label: "Property Type" },
                     { value: "1", label: "Apartments" },
@@ -131,6 +152,9 @@ export default function Reservation() {
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
+                  onChange={value => {
+                    setBedroom(value)
+                  }}
                   options={[
                     { value: "", label: "Bedroom" },
                     { value: "1", label: "1" },
@@ -148,6 +172,9 @@ export default function Reservation() {
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
+                  onChange={value => {
+                    setBathroom(value)
+                  }}
                   options={[
                    { value: "", label: "Bathroom" },
                     { value: "1", label: "1" },
@@ -156,14 +183,14 @@ export default function Reservation() {
                 />
               </Form.Item>
             </Col>
-            <Col span={12} lg={3}>
-              <Form.Item name={["Min Price"]}>
-                <InputNumber min={1} defaultValue={3} />
+            <Col span={12} lg={5}>
+              <Form.Item name={["min_price"]}>
+                <InputNumber min={1} placeholder="Min Price" />
               </Form.Item>
             </Col>
-            <Col span={12} lg={3}>
-              <Form.Item name={["Max Price"]}>
-                <InputNumber min={1} defaultValue={3} />
+            <Col span={12} lg={5}>
+              <Form.Item name={["max_price"]}>
+                <InputNumber min={1} placeholder="Max Price" />
               </Form.Item>
             </Col>
               </Row>

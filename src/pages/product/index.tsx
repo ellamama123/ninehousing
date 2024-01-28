@@ -35,9 +35,18 @@ export default function Home() {
   const [endDate, setEndDate] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
+  const [roomLocation, setRoomLocation] = useState<any>("");
+  const [districts, setDistricts] = useState<string>("");
 
   useEffect(() => {
     getProduct();
+    axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
+    .then((response: any) => {
+      let districtList: any = response.data.districts;
+      setDistricts([
+        ...districtList?.map(district => ({ value: district.code, label: district.name }))
+      ])
+    })
   }, []);
 
   useEffect(() => {
@@ -57,7 +66,8 @@ export default function Home() {
           quickSearch: name,
           "sortDesc[]": sort,
           startDate: startDate,
-          endDate: endDate
+          endDate: endDate,
+          district: roomLocation
         },
       })
       .then((response) => {
@@ -145,7 +155,10 @@ export default function Home() {
                 <Select
                   defaultValue="Choose Address"
                   style={{ width: "90%", height: "100%", }}
-                  options={optionPrice}
+                  onChange={value => {
+                    setRoomLocation(value)
+                  }}
+                  options={districts}
                 />
               </Col>
               <Col

@@ -27,6 +27,11 @@ export default function ProductDetail() {
   const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any, view_count: any}>();
   const [email, setEmail] = useState<string>();
   const [messageApi, contextHolder] = message.useMessage();
+  const [roomType, setRoomType] = useState<any>();
+  const [roomLocation, setRoomLocation] = useState<any>();
+  const [bedroom, setBedroom] = useState<any>();
+  const [bathroom, setBathroom] = useState<any>();
+  const [districts, setDistricts] = useState<string>("");
 
   useEffect(() => {
     let id = router.query.id;
@@ -40,15 +45,29 @@ export default function ProductDetail() {
     }
   }, [router.query.id]);
 
+  useEffect(() => {
+    axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
+    .then((response: any) => {
+      let districtList: any = response.data.districts;
+      setDistricts([
+        ...districtList?.map(district => ({ value: district.code, label: district.name }))
+      ])
+    })
+  }, [])
+
   const onFinish = (values: any) => {
-    console.log('333');
     let id = router.query.id;
     axios
       .post("https://web-developing.site/api/reservations", {
         name: values.Name,
         email: values.Email,
         phone: values.Phone,
-        room_id: id,
+        min_price: values.min_price,
+        max_price: values.max_price,
+        district: roomLocation,
+        room_type: roomType,
+        bedroom: bedroom,
+        bathroom: bathroom,
       })
       .then((response) => {
         messageApi.success("Room reservation request has been sent.", 1);
@@ -346,7 +365,6 @@ export default function ProductDetail() {
                         <Input
                           style={{ width: "310px" }}
                           placeholder="Your Name"
-                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </Form.Item>
                       <Form.Item name={"Email"} rules={[{ type: "email" }]}>
@@ -363,18 +381,20 @@ export default function ProductDetail() {
                       </Form.Item>
                       <Form.Item name={["location"]}>
                         <Select
-                          defaultValue=""
+                          placeholder="Property Location"
+                          onChange={value => {
+                            setRoomLocation(value)
+                          }}
                           style={{ width: "100%" }}
-                          options={[
-                            { value: '', label: 'Property Location' },
-                            { value: 'lucy', label: 'Lucy' },
-                            { value: 'Yiminghe', label: 'yiminghe' },
-                          ]}
+                          options={districts}
                         />
                       </Form.Item>
                       <Form.Item name={["type"]}>
                         <Select
                           defaultValue={{ value: "0", label: "Property Type" }}
+                          onChange={value => {
+                            setRoomType(value)
+                          }}
                           options={[
                             { value: "0", label: "Property Type" },
                             { value: "1", label: "Apartments" },
@@ -388,10 +408,15 @@ export default function ProductDetail() {
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
+                          onChange={value => {
+                            setBedroom(value)
+                          }}
                           options={[
                             { value: '', label: 'Bedroom' },
                             { value: '1', label: '1' },
                             { value: '2', label: '2' },
+                            { value: '3', label: '3' },
+                            { value: '4', label: '4' },
                           ]}
                         />
                       </Form.Item>
@@ -399,6 +424,9 @@ export default function ProductDetail() {
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
+                          onChange={value => {
+                            setBathroom(value)
+                          }}
                           options={[
                             { value: '', label: 'Bathroom' },
                             { value: '1', label: '1' },
@@ -406,11 +434,11 @@ export default function ProductDetail() {
                           ]}
                         />
                       </Form.Item>
-                      <Form.Item name={["Min Price"]}>
-                        <InputNumber min={1} defaultValue={3} />
+                      <Form.Item name={["min_price"]}>
+                        <InputNumber min={1} placeholder="Min Price" />
                       </Form.Item>
-                      <Form.Item name={["Max Price"]}>
-                        <InputNumber min={1} defaultValue={3} />
+                      <Form.Item name={["max_price"]}>
+                        <InputNumber min={1} placeholder="Max Price" />
                       </Form.Item>
                       <Form.Item
                         wrapperCol={{ ...layout.wrapperCol }}

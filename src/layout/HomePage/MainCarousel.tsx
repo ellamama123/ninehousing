@@ -11,10 +11,18 @@ const contentStyle: React.CSSProperties = {
   background: "#364d79",
 };
 
-const MainCarousel: React.FC = (slide: any) => {
+interface MailCarouselProps {
+  slide: Array<any>; // Change `any` to the actual type of your items in the array
+}
+
+const MainCarousel: React.FC<MailCarouselProps> = ({slide}) => {
   const onChange = (currentSlide: number) => {
     console.log(slide);
   };
+
+  React.useEffect(() => {
+    console.log(slide);
+  }, [])
 
   return (
     <Carousel
@@ -33,50 +41,23 @@ const MainCarousel: React.FC = (slide: any) => {
         />
       }
     >
-      <div>
-        <div className="slide-image-wrap">
-          <Image
-            className="slide-image"
-            src="/image/slide-1.png"
-            alt="Logo"
-            preview={false}
-          />
-          <p className="slide-text">Serviced Apartment</p>
-        </div>
-      </div>
-      <div>
-        <div className="slide-image-wrap">
-          <Image
-            className="slide-image"
-            src="/image/slide-1.png"
-            alt="Logo"
-            preview={false}
-          />
-          <p className="slide-text">Serviced Apartment</p>
-        </div>
-      </div>
-      <div>
-        <div className="slide-image-wrap">
-          <Image
-            className="slide-image"
-            src="/image/slide-1.png"
-            alt="Logo"
-            preview={false}
-          />
-          <p className="slide-text">Serviced Apartment</p>
-        </div>
-      </div>
-      <div>
-        <div className="slide-image-wrap">
-          <Image
-            className="slide-image"
-            src="/image/slide-1.png"
-            alt="Logo"
-            preview={false}
-          />
-          <p className="slide-text">Serviced Apartment</p>
-        </div>
-      </div>
+      {
+        slide?.map((data, index) => (
+          <div>
+            <div className="slide-image-wrap">
+              <Image
+                className="slide-image"
+                src={data}
+                alt="Logo"
+                preview={false}
+              />
+              {/* <p className="slide-text">Serviced Apartment</p> */}
+            </div>
+          </div>
+        ))
+      }
+
+
     </Carousel>
   );
 };

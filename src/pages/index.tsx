@@ -21,7 +21,7 @@ export default function Home() {
     axios
       .get("https://web-developing.site/api/home")
       .then((response) => {
-        // setSlide(response.data.data.meta-info);
+        setSlide(response.data.meta_info[0].images);
         setHome(response.data.rooms);
         setBlog(response.data.blogs);
         
@@ -41,7 +41,7 @@ export default function Home() {
         <link rel="icon" href="/image/logo.png" />
       </Head>
       <Layout> 
-        <MainCarousel />
+        <MainCarousel slide={slide} />
         <DivOne />
         <WhyChooseUs />
         <OurApartments home={home} />
