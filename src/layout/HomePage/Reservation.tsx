@@ -34,6 +34,7 @@ export default function Reservation() {
   const [email, setEmail] = useState<string>();
 
   const onFinish = (values: any) => {
+
     axios
       .post("https://web-developing.site/api/reservations", {
         name: values.Name,
@@ -44,11 +45,13 @@ export default function Reservation() {
         messageApi.success("Room reservation request has been sent.", 1);
       })
       .catch((error) => {
+        console.log('2121');
         messageApi.error(error.response.data.message, 1);
       });
   };
   return (
     <div className="container reservation-home">
+      {contextHolder}
       <div
         style={{
           backgroundColor: "black",
@@ -141,7 +144,7 @@ export default function Reservation() {
             <Col span={24}>
               <Row style={{justifyContent: 'center'}}>
               <Col span={24} lg={8}>
-              <Form.Item name={["bathroom"]} rules={[{ required: true }]}>
+              <Form.Item name={["bathroom"]}>
                 <Select
                   defaultValue=""
                   style={{ width: "100%" }}
