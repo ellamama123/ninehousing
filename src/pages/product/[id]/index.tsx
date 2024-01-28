@@ -31,7 +31,7 @@ export default function ProductDetail() {
   const [roomLocation, setRoomLocation] = useState<any>();
   const [bedroom, setBedroom] = useState<any>();
   const [bathroom, setBathroom] = useState<any>();
-  const [districts, setDistricts] = useState<string>("");
+  const [districts, setDistricts] = useState<any>();
 
   useEffect(() => {
     let id = router.query.id;

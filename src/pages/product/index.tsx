@@ -36,7 +36,7 @@ export default function Home() {
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [roomLocation, setRoomLocation] = useState<any>("");
-  const [districts, setDistricts] = useState<string>("");
+  const [districts, setDistricts] = useState<any>();
 
   useEffect(() => {
     getProduct();

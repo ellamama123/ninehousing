@@ -32,7 +32,7 @@ const validateMessages = {
 export default function Reservation() {
   const [messageApi, contextHolder] = message.useMessage();
   const [email, setEmail] = useState<string>();
-  const [districts, setDistricts] = useState<string>();
+  const [districts, setDistricts] = useState<any>();
   const [roomType, setRoomType] = useState<any>();
   const [roomLocation, setRoomLocation] = useState<any>();
   const [bedroom, setBedroom] = useState<any>();
