@@ -464,16 +464,13 @@ export default function ProductDetail() {
               <h1 style={{ marginBottom: "25px", fontFamily: "system-ui" }}>
                 Related properties
               </h1>
-              <Row>
+              <Row gutter={24}>
                 {product?.related_rooms.slice(0,3).map((prd: any, index: any) => (
                   <Col
                     className="related-product"
                     lg={8}
                     span={24}
                     key={index}
-                    style={{
-                      paddingRight: index == 0 || index == 1 ? "20px" : 0,
-                    }}
                   >
                     <Row>
                       <Col span={24}>
@@ -481,7 +478,10 @@ export default function ProductDetail() {
                           <Image
                             alt="test"
                             width={"100%"}
-                            height={"75%"}
+                            style={{
+                              aspectRatio: '3 / 2', 
+                              objectFit: 'cover'
+                            }}
                             src={prd.thumbnail}
                           />
                           <div
@@ -515,7 +515,7 @@ export default function ProductDetail() {
                                   marginTop: "10px",
                                 }}
                               >
-                                <Col span={6}>
+                                <Col span={24}>
                                   <p
                                     style={{
                                       fontSize: "20px",
@@ -525,8 +525,8 @@ export default function ProductDetail() {
                                     {prd?.name}
                                   </p>
                                 </Col>
-                                <Col span={18}>
-                                  <p>
+                                <Col span={24}>
+                                  <p style={{marginTop: '10px'}}>
                                     {prd?.address}
                                   </p>
                                 </Col>
