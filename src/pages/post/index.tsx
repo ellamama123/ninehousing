@@ -6,7 +6,7 @@ import Link from "next/link";
 import Layout from "../../layout/Layout";
 
 export default function Post() {
-  const [post, setPost] = useState<{thumbnail: any,title: any, content: any, id: any, created_at: any}[]>([]);
+  const [post, setPost] = useState<{thumbnail: any,title: any, content: any, id: any, created_at: any, description: any}[]>([]);
   const [perPage, setPerPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
