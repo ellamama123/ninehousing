@@ -110,7 +110,7 @@ export default function Home() {
             }}
           >
             <Row>
-              <Col lg={4} span={24} className="search-name">
+              <Col lg={6} span={24} className="search-name">
                 <Input
                   className="input-name"
                   size="large"
@@ -119,7 +119,7 @@ export default function Home() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </Col>
-              <Col lg={9} span={24} className="search-date">
+              <Col lg={7} span={24} className="search-date">
                 <DatePicker
                   onChange={changeStartDate}
                   style={{

@@ -218,7 +218,7 @@ label.ant-radio-wrapper {
 
 .search-date, .search-button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
@@ -579,7 +579,7 @@ span.ant-btn-icon {
   background-color: #DEB25F !important;
 }
 
-img.ant-image-img.slide-image {
+img.ant-image-img.slide-image.main {
   width: 100%;
   aspect-ratio: 16/8;
 }

@@ -125,7 +125,7 @@ export default function Post() {
                             color: "black",
                             fontWeight: "500",
                           }}
-                          dangerouslySetInnerHTML={{ __html: data?.content }}
+                          dangerouslySetInnerHTML={{ __html: data?.description }}
                         />
                         <p
                           style={{

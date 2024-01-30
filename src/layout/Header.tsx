@@ -100,13 +100,13 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <div>
+            {/* <div>
               <Select
                 defaultValue="Tiếng Việt"
                 style={{ width: 120 }}
                 options={[{ value: "Tiếng Việt", label: "Tiếng Việt" }]}
               />
-            </div>
+            </div> */}
           </Col>
         </Row>
       </div>
@@ -136,11 +136,11 @@ const Header = () => {
               About us
             </Button>
             <div style={{ marginTop: '20px', display: "flex", alignItems: "center",  justifyContent: "center" }}>
-              <Select
+              {/* <Select
                 defaultValue="Tiếng Việt"
                 style={{ width: 120 }}
                 options={[{ value: "Tiếng Việt", label: "Tiếng Việt" }]}
-              />
+              /> */}
             </div>
           </div>
         </Drawer>

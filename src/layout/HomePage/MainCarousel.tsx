@@ -46,7 +46,7 @@ const MainCarousel: React.FC<MailCarouselProps> = ({slide}) => {
           <div key={index}>
             <div className="slide-image-wrap">
               <Image
-                className="slide-image"
+                className="slide-image main"
                 src={data}
                 alt="Logo"
                 preview={false}

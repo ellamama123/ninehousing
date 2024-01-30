@@ -57,7 +57,8 @@ export default function PostDetail() {
           </p>
         </div>
         <div style={{ marginTop: "100px", marginBottom: "50px", width: "80%", margin: "0 auto", paddingBottom: '50px' }}>
-          <p style={{ paddingTop: "20px" }}>Blog/ Bài viết</p>
+          <p style={{ paddingTop: "20px" }}>
+            <Link href="/post"><span style={{color: '#1b75d0', cursor: 'pointer', marginRight: '5px'}}>Blog</span></Link>/ Bài viết</p>
           <div>
             <Row>
               <Col lg={16} span={24}>

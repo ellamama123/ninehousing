@@ -139,7 +139,7 @@ export default function Contact() {
                       </Col>
                       <Col span={20} >
                         <span style={{ fontSize: '18px' }}>
-                          No.11 Ton That Thiep Str., Ba Dinh Dist, Ha Noi
+                        No 34/12 Dao Tan, Ba Dinh Dist, Ha Noi, Viet Nam
                         </span>
                       </Col>
                     </Row>
@@ -151,7 +151,7 @@ export default function Contact() {
                       </Col>
                       <Col span={20}>
                         <span style={{ fontSize: '18px' }}> 
-                          Namtoong@gmail.com
+                          ninehousing99@mail.com
                         </span>
                       </Col>
                     </Row>
@@ -163,7 +163,7 @@ export default function Contact() {
                       </Col>
                       <Col span={20}>
                         <span style={{ fontSize: '18px' }}>
-                          0333333333
+                          0968.071.393
                         </span>
                       </Col>
                     </Row>
