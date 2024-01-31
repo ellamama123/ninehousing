@@ -51,7 +51,7 @@ export default function ProductDetail() {
   }, [router.query.id]);
 
   useEffect(() => {
-    axios.get("https://provinces.open-api.vn/api/p/1?depth=2")
+    axios.get("https://web-developing.site/api/locations/1")
     .then((response: any) => {
       let districtList: District[] = response.data.districts;
       setDistricts([
