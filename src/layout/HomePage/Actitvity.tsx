@@ -1,6 +1,7 @@
 import React from "react";
-import { Col, Button, Row, Image } from "antd";
+import { Col, Button, Row, Image, Carousel } from "antd";
 import Link from "next/link";
+import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
 interface ActivityProps {
   blog: Array<any>; // Change `any` to the actual type of your items in the array
@@ -25,13 +26,40 @@ const convertDateString = (originalDateString: any) => {
   return convertedDateString;
 }
 
-const Activity: React.FC<ActivityProps> = ({ blog }) => (
+const Activity: React.FC<ActivityProps> = ({ blog }) => {
+  return (
   <div className="activity">
     <div className="container">
       <p className="activity-title">Activity</p>
-      <Row>
-        {blog.slice(-3).map((bl, index) => (
-          <Col lg={8} span={24} className="post-wrap" key={index}>
+      <Carousel
+        arrows
+        dots={false}
+        nextArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<RightOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+        prevArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<LeftOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+        slidesToShow={3}
+        style={{ margin: '0 -10px' }}
+        responsive={[
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            },
+          },
+        ]}
+      >
+        {blog.map((bl, index) => (
+          <Col className="post-wrap" key={index}>
             <div>
               <Image width={"100%"}                     
                   style={{
@@ -105,9 +133,10 @@ const Activity: React.FC<ActivityProps> = ({ blog }) => (
             </div>
           </Col>
         ))}
-      </Row>
+      </Carousel>
     </div>
   </div>
 );
+}
 
 export default Activity;

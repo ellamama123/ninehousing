@@ -154,7 +154,7 @@ a {
 .menu {
   position: fixed;
   background: transparent;
-  padding: 10px 0;
+  padding: 25px 0;
   top: 0;
   z-index: 100;
   width: 100%;
@@ -382,6 +382,33 @@ span.ant-btn-icon {
   padding: 30px 0;
 }
 
+.oap-wrap-slide .slick-track {
+  display: flex;
+  gap: 15px;
+}
+
+.oap-wrap-slide .slick-prev {
+  margin-left: -4%;
+}
+
+.oap-wrap-slide .slick-prev .ant-btn-icon {
+  color: black;
+  background: white;
+}
+
+.oap-wrap-slide .slick-next {
+  left: 102%;
+}
+
+.oap-wrap-slide .slick-next .ant-btn-icon {
+  color: black;
+  background: white;
+}
+
+.oap-wrap-slide .slick-active button {
+  width: 100% !important;
+}
+
 .oap-title {
   font-family: system-ui;
   margin-top: 50px;
@@ -443,6 +470,33 @@ span.ant-btn-icon {
   font-weight: bold;
   margin-bottom: 30px;
   font-family: system-ui;
+}
+
+.activity .slick-track {
+  display: flex;
+  gap: 15px;
+}
+
+.activity .slick-prev {
+  margin-left: -4%;
+}
+
+.activity .slick-prev .ant-btn-icon {
+  color: white;
+  background: black;
+}
+
+.activity .slick-next {
+  left: 102%;
+}
+
+.activity .slick-next .ant-btn-icon {
+  color: white;
+  background: black;
+}
+
+.activity .slick-active button {
+  width: 100% !important;
 }
 
 /** PARTNER **/
@@ -594,6 +648,22 @@ img.ant-image-img.slide-image.main {
     display: none !important;
   }
 
+  .customer .slick-prev {
+    margin-left: -16%;
+  }
+
+  .activity .slick-next {
+    left: 95%;
+  }
+
+  .oap-wrap-slide .slick-next {
+    left: 97%;
+  }
+
+  .oap-wrap-slide .slick-prev, .activity .slick-prev {
+    margin-left: -5%;
+  }
+  
   .slide-text {
     font-size: 24px;
   }
@@ -616,9 +686,9 @@ img.ant-image-img.slide-image.main {
     padding: 15px;
   }
 
-  .product {
+  /* .product {
     margin-top: 20px !important;
-  }
+  } */
 
   .product-list-text {
     font-size: 30px !important;
@@ -767,9 +837,9 @@ img.ant-image-img.slide-image.main {
     left: 88%
   }
 
-  .container-customer .slick-next, .container-customer .slick-next {
+  /* .container-customer .slick-next, .container-customer .slick-next {
     top: -9%;
-  }
+  } */
 
   .customer-title {
     margin-bottom: 85px;

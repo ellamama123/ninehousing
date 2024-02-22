@@ -46,18 +46,18 @@ const Header = () => {
   const router = useRouter() 
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    // const handleScroll = () => {
+    //   if (window.scrollY > 200) {
+    //     setScrolled(true);
+    //   } else {
+    //     setScrolled(false);
+    //   }
+    // };
 
-    window.addEventListener('scroll', handleScroll);
+    // window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      // window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -73,18 +73,18 @@ const Header = () => {
     <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname !== "/" ? ' product' : '' }`}>
       <div className="container">
         <Row style={{ display: "flex", alignItems: 'center'}}> 
-          <Col span={12}>
+          <Col lg={12} span={10}>
             <Row className="menu-desktop">
               <Col span={1}>
               <Popover content={content} title="">
-                  <div style={{color:"white", cursor: "pointer", fontSize: '24px'}}>
+                  <div style={{color:"black", cursor: "pointer", fontSize: '24px'}}>
                     <MenuOutlined />
                   </div>
                 </Popover>
               </Col>
             </Row>
           </Col>
-          <Col span={3}>
+          <Col lg={3} span={5}>
             <Link href="/" >  
               <div style={{cursor: 'pointer'}}>
                 <Image src="/image/logo.png" alt="Logo" preview={false} />

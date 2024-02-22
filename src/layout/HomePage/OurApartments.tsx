@@ -1,24 +1,52 @@
 import React from "react";
-import { Col, Button, Row, Image } from "antd";
+import { Col, Button, Row, Image, Carousel } from "antd";
 import Link from "next/link";
+import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
 interface OurApartmentsProps {
   home: Array<any>; // Change `any` to the actual type of your items in the array
 }
 
-const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
+const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => {
+  const onChange = (currentSlide: number) => {
+  };
+
+  return (
   <div className="oap-wrap">
     <div className="container">
       <p className="oap-title">Our apartments</p>
-      <Row gutter={24}>
+      <div className="oap-wrap-slide">
+      <Carousel
+        afterChange={onChange}
+        arrows
+        dots={false}
+        nextArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<RightOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+        prevArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<LeftOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+        responsive={[
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            },
+          },
+        ]}
+        slidesToShow={3}
+        style={{ margin: '0 -10px' }}
+      >
         {home.map((hom, index: number) => (
-          <Col
-            className="related-product"
-            lg={8}
-            span={24}
-            key={index}
-          >
-            <Row>
+
+            <Row key={index}>
               <Col span={24}>
                 <div>
                   <Image
@@ -63,7 +91,7 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
                         }}
                       >
                         <Col span={24}>
-                          <p style={{ fontSize: "20px", minHeight: '50px', fontWeight: "bold" }}>
+                          <p style={{ fontSize: "20px", minHeight: '70px', fontWeight: "bold" }}>
                             {hom.name}
                           </p>
                         </Col>
@@ -140,11 +168,13 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => (
                 </div>
               </Col>
             </Row>
-          </Col>
         ))}
-      </Row>
+      </Carousel>
+      </div>
+
     </div>
   </div>
 );
+                          }
 
 export default OurApartments;
