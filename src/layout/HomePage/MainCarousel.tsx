@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, Image, Button } from "antd";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import SearchBar from "../../layout/SearchBar";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -19,46 +20,55 @@ const MainCarousel: React.FC<MailCarouselProps> = ({slide}) => {
   const onChange = (currentSlide: number) => {
     console.log(slide);
   };
+  
+  const handleData = () => {
+
+  }
 
   React.useEffect(() => {
     console.log(slide);
   }, [])
 
   return (
-    <Carousel
-      afterChange={onChange}
-      arrows
-      nextArrow={
-        <Button
-          style={{ padding: "1rem", height: "auto", width: "auto" }}
-          icon={<RightOutlined style={{ fontSize: 20 }} />}
-        />
-      }
-      prevArrow={
-        <Button
-          style={{ padding: "1rem", height: "auto", width: "auto" }}
-          icon={<LeftOutlined style={{ fontSize: 20 }} />}
-        />
-      }
-    >
-      {
-        slide?.map((data, index) => (
-          <div key={index}>
-            <div className="slide-image-wrap">
-              <Image
-                className="slide-image main"
-                src={data}
-                alt="Logo"
-                preview={false}
-              />
-              {/* <p className="slide-text">Serviced Apartment</p> */}
+    <div class="slide-home">
+      <div className="search-bar-home">
+        <SearchBar onChildData={handleData}/>
+      </div>
+
+      <Carousel
+        afterChange={onChange}
+        arrows
+        nextArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<RightOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+        effect="fade"
+        prevArrow={
+          <Button
+            style={{ padding: "1rem", height: "auto", width: "auto" }}
+            icon={<LeftOutlined style={{ fontSize: 20 }} />}
+          />
+        }
+      >
+        {
+          slide?.map((data, index) => (
+            <div key={index}>
+              <div className="slide-image-wrap">
+                <Image
+                  className="slide-image main"
+                  src={data}
+                  alt="Logo"
+                  preview={false}
+                />
+                {/* <p className="slide-text">Serviced Apartment</p> */}
+              </div>
             </div>
-          </div>
-        ))
-      }
-
-
-    </Carousel>
+          ))
+        }
+      </Carousel>
+    </div>
   );
 };
 

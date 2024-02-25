@@ -1,22 +1,17 @@
-import { SearchOutlined } from "@ant-design/icons";
 import React from "react";
 import {
   Row,
   Col,
   Button,
-  Input,
-  DatePicker,
-  Radio,
-  Checkbox,
   Pagination,
-  Select
 } from "antd";
-import type { RadioChangeEvent } from "antd";
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "../../layout/Layout";
+import SearchBar from "../../layout/SearchBar";
+import { useRouter } from 'next/router';
 
 const optionPrice = [
   { label: "50$ & below ", value: "Lessthan50" },
@@ -25,43 +20,38 @@ const optionPrice = [
   { label: "200$ & above ", value: "GretherThan200" },
 ];
 
-interface District {
-  code: string;
-  name: string;
-}
 
 export default function Home() {
   const [product, setProduct] = useState<{id: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any}[]>([]);
-  const [price, setPrice] = useState(null);
-  const [name, setName] = useState("");
   const [sort, setSort] = useState("");
   const [perPage, setPerPage] = useState(0);
+  const [name, setName] = useState("");
+  const [roomLocation, setRoomLocation] = useState<any>();
+  const [price, setPrice] = useState(null);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
-  const [roomLocation, setRoomLocation] = useState<any>("");
-  const [districts, setDistricts] = useState<any>();
+  const router = useRouter();
+  const { name_search, price_search, startDate_search, endDate_search, roomLocation_search } = router.query;
+  
 
   useEffect(() => {
-    getProduct();
-    axios.get("https://web-developing.site/api/locations/1")
-    .then((response: any) => {
-      let districtList: District[] = response.data.districts;
-      setDistricts([
-        ...districtList?.map(district => ({ value: district.code, label: district.name }))
-      ])
-    })
+    if(name_search || price_search || startDate_search || endDate_search || roomLocation_search) {
+      setName(name_search);
+      setPrice(price_search);
+      setStartDate(startDate_search);
+      setEndDate(endDate_search);
+      setRoomLocation(roomLocation_search);
+      getProduct();
+    } else {
+      getProductFirst();
+    }
   }, []);
 
   useEffect(() => {
     getProduct();
   }, [pageIndex]);
-
-  const onChangePrice = (e: RadioChangeEvent) => {
-    setPrice(e.target.value);
-    getProduct();
-  };
 
   const getProduct = () => {
     axios
@@ -83,18 +73,32 @@ export default function Home() {
       });
   };
 
+  const getProductFirst = () => {
+    axios
+      .get("https://web-developing.site/api/rooms?page=" + pageIndex, {
+        params: {
+        },
+      })
+      .then((response) => {
+        setProduct(response.data.data);
+        setPerPage(response.data.meta.per_page);
+        setPageIndex(response.data.meta.current_page);
+        setTotalPage(response.data.meta.total);
+      });
+  };
+
   const onChange = (page: any) => {
     setPageIndex(page);
   };
 
-  const changeStartDate = (data: any) => {
-    setStartDate(data)
-  }
-
-  const changeEndDate = (data: any) => {
-    setEndDate(data)
-  }
-
+  const handleChildData = (name: any, price: any, startDate: any, endDate: any, roomLocation: any) => {
+    setName(name);
+    setPrice(price);
+    setStartDate(startDate);
+    setEndDate(endDate);
+    setRoomLocation(roomLocation);
+    getProduct();
+  };
 
   return (
     <div>
@@ -109,88 +113,7 @@ export default function Home() {
               margin: "0 auto",
             }}
           >
-            <Row>
-              <Col lg={6} span={24} className="search-name">
-                <Input
-                  className="input-name"
-                  size="large"
-                  placeholder="Enter a destination or property"
-                  prefix={<SearchOutlined />}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Col>
-              <Col lg={7} span={24} className="search-date">
-                <DatePicker
-                  onChange={changeStartDate}
-                  style={{
-                    width: 125,
-                    padding: 15,
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                  }}
-                  placeholder="Check in"
-                />
-                <DatePicker
-                  onChange={changeEndDate}
-                  style={{
-                    width: 125,
-                    padding: 15,
-                    borderTopLeftRadius: 0,
-                    borderBottomLeftRadius: 0,
-                  }}
-                  placeholder="Check out"
-                />
-              </Col>
-              <Col lg={4} span={24} className="search-name" style={{
-                 display: "flex",
-                 justifyContent: "flex-end",
-                 alignItems: "center",
-              }}>
-                <Select
-                  defaultValue="Choose Price"
-                  style={{ width: "90%", height: "100%" }}
-                  options={optionPrice}
-                />
-              </Col>
-              <Col lg={4} span={24} className="search-name"  style={{
-                 display: "flex",
-                 justifyContent: "flex-end",
-                 alignItems: "center",
-              }}>
-                <Select
-                  defaultValue="Choose Address"
-                  style={{ width: "90%", height: "100%", }}
-                  onChange={value => {
-                    setRoomLocation(value)
-                  }}
-                  options={districts}
-                />
-              </Col>
-              <Col
-                lg={3}
-                span={24}
-                className="search-button"
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                }}
-              >
-                <Button
-                  className="button-search"
-                  type="primary"
-                  style={{
-                    height: "80%",
-                    backgroundColor: "#DEB25F",
-                    width: 125,
-                    fontWeight: "bold",
-                  }}
-                  onClick={getProduct}
-                >
-                  Search
-                </Button>
-              </Col>
-            </Row>
+            <SearchBar onChildData={handleChildData} />
 
             <div className="product" style={{ marginTop: 50 }}>
               <Row>
@@ -234,12 +157,20 @@ export default function Home() {
                     </div>
                     {product &&
                       product.map((prd: any, index: any) => (
-                        <Row
+                        <Link
                           key={index}
-                          style={{ marginTop: 20, backgroundColor: "#F1F1F1" }}
+                          href={
+                            window.location.origin +
+                            "/product/" +
+                            prd.id
+                          }
+                          title=""
                         >
+                          <Row
+                            style={{ marginTop: 20, backgroundColor: "#F1F1F1", cursor:'pointer' }}
+                          >    
                           <Col lg={6} span={24}>
-                            <img width={"100%"} style={{aspectRatio: '1/1', objectFit: 'cover'}} alt="" src={prd?.thumbnail} />
+                            <img width={"100%"} height={'100%'} style={{aspectRatio: '1/1', objectFit: 'cover'}} alt="" src={prd?.thumbnail} />
                           </Col>
                           <Col
                             lg={18}
@@ -283,6 +214,7 @@ export default function Home() {
                                 <img
                                   width={20}
                                   src={`icon/square-Medical.png`}
+                                  alt=""
                                 />
                                 <span>{prd.acreage}</span>
                               </Col>
@@ -326,6 +258,8 @@ export default function Home() {
                             </Row>
                           </Col>
                         </Row>
+                        </Link>
+
                       ))}
 
                     <div

@@ -56,6 +56,7 @@ export default function Reservation() {
         room_type: roomType,
         bedroom: bedroom,
         bathroom: bathroom,
+        note: values.note
       })
       .then((response) => {
         messageApi.success("Room reservation request has been sent.", 1);
@@ -173,34 +174,42 @@ export default function Reservation() {
             </Col>
             <Col span={24}>
               <Row style={{justifyContent: 'center'}}>
-              <Col span={24} lg={8}>
-              <Form.Item name={["bathroom"]}>
-                <Select
-                  defaultValue=""
-                  style={{ width: "100%" }}
-                  onChange={value => {
-                    setBathroom(value)
-                  }}
-                  options={[
-                   { value: "", label: "Bathroom" },
-                    { value: "1", label: "1" },
-                    { value: "2", label: "2" },
-                  ]}
-                />
-              </Form.Item>
+                <Col span={24} lg={8}>
+                  <Form.Item name={["bathroom"]}>
+                    <Select
+                      defaultValue=""
+                      style={{ width: "100%" }}
+                      onChange={value => {
+                        setBathroom(value)
+                      }}
+                      options={[
+                      { value: "", label: "Bathroom" },
+                        { value: "1", label: "1" },
+                        { value: "2", label: "2" },
+                      ]}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12} lg={5}>
+                  <Form.Item name={["min_price"]}>
+                    <InputNumber min={1} placeholder="Min Price" />
+                  </Form.Item>
+                </Col>
+                <Col span={12} lg={5}>
+                  <Form.Item name={["max_price"]}>
+                    <InputNumber min={1} placeholder="Max Price" />
+                  </Form.Item>
+                </Col>
+              </Row>  
             </Col>
-            <Col span={12} lg={5}>
-              <Form.Item name={["min_price"]}>
-                <InputNumber min={1} placeholder="Min Price" />
-              </Form.Item>
-            </Col>
-            <Col span={12} lg={5}>
-              <Form.Item name={["max_price"]}>
-                <InputNumber min={1} placeholder="Max Price" />
-              </Form.Item>
-            </Col>
-              </Row>
-            
+            <Col span={24}>
+              <Row style={{justifyContent: 'center'}}>
+                <Col span={24} lg={8}>
+                  <Form.Item name={"note"} rules={[{ type: "text" }]}>
+                    <Input style={{ width: "100%" }} placeholder="Note" />
+                  </Form.Item>
+                </Col>
+              </Row>  
             </Col>
 
           </Row>

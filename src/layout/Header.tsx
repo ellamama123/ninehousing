@@ -73,7 +73,7 @@ const Header = () => {
     <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname !== "/" ? ' product' : '' }`}>
       <div className="container">
         <Row style={{ display: "flex", alignItems: 'center'}}> 
-          <Col lg={12} span={10}>
+          <Col lg={11} span={10}>
             <Row className="menu-desktop">
               <Col span={1}>
               <Popover content={content} title="">
@@ -84,10 +84,10 @@ const Header = () => {
               </Col>
             </Row>
           </Col>
-          <Col lg={3} span={5}>
+          <Col lg={4} span={5}>
             <Link href="/" >  
               <div style={{cursor: 'pointer'}}>
-                <Image src="/image/logo.png" alt="Logo" preview={false} />
+                <Image src="/image/logo.png" alt="Logo" style={{width: '130%'}} preview={false} />
               </div>
             </Link>
           </Col>

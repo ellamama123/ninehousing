@@ -73,7 +73,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <span>ninehousing99@mail.com</span>
+                        <a href="mailto:ninehousing99@mail.com">ninehousing99@mail.com</a>
                       </Col>
                     </Row>
                     <Row style={{ marginTop: "25px" }}>
@@ -95,7 +95,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <span>0968.071.393</span>
+                        <a href="tel:0968071393">0968.071.393</a>
                       </Col>
                     </Row>
                   </Col>

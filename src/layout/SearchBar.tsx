@@ -1,0 +1,157 @@
+import { useEffect, useState } from "react";
+import React from 'react'
+import {
+    Row,
+    Col,
+    Button,
+    Input,
+    DatePicker,
+    Select
+  } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import type { RadioChangeEvent } from "antd";
+import axios from "axios";
+import { useRouter } from 'next/router';
+
+const optionPrice = [
+    { label: "50$ & below ", value: "Lessthan50" },
+    { label: "50$ to 100$", value: "About50To100" },
+    { label: "100$ to 200$", value: "About100To200" },
+    { label: "200$ & above ", value: "GretherThan200" },
+  ];
+
+interface District {
+  code: string;
+  name: string;
+}
+
+export default function SearchBar({ onChildData: any }) {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [districts, setDistricts] = useState<any>();
+  const [roomLocation, setRoomLocation] = useState<any>();
+  const [price, setPrice] = useState(null);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const currentRoute = router.pathname;
+
+
+const handleChange = (value: string) => {
+  setPrice(value)
+};
+
+  const changeStartDate = (data: any) => {
+    setStartDate(data)
+  }
+
+  const changeEndDate = (data: any) => {
+    setEndDate(data)
+  }
+
+  useEffect(() => {
+    axios.get("https://web-developing.site/api/locations/1")
+    .then((response: any) => {
+      let districtList: District[] = response.data.districts;
+      setDistricts([
+        ...districtList?.map(district => ({ value: district.code, label: district.name }))
+      ])
+    })
+  }, []);
+
+  const setUpdateProduct = () => {
+    if (currentRoute == '/') {
+      router.push({
+        pathname: '/product',
+        query: { name_search: name, price_search: price, startDate_search: startDate, endDate_search: endDate, roomLocation_search: roomLocation },
+      });
+    } else {
+      onChildData(name, price, startDate, endDate, roomLocation);
+    }
+  }
+
+  return (
+    <Row>
+        <Col lg={6} span={24} className="search-name">
+        <Input
+            className="input-name"
+            size="large"
+            placeholder="Enter a destination or property"
+            prefix={<SearchOutlined />}
+            onChange={(e) => setName(e.target.value)}
+        />
+        </Col>
+        <Col lg={7} span={24} className="search-date">
+        <DatePicker
+            onChange={changeStartDate}
+            style={{
+            width: 125,
+            padding: 15,
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0,
+            }}
+            placeholder="Check in"
+        />
+        <DatePicker
+            onChange={changeEndDate}
+            style={{
+            width: 125,
+            padding: 15,
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0,
+            }}
+            placeholder="Check out"
+        />
+        </Col>
+        <Col lg={4} span={24} className="search-name" style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+        }}>
+        <Select
+            defaultValue="Choose Price"
+            style={{ width: "90%", height: "100%" }}
+            options={optionPrice}
+            onChange={handleChange}
+        />
+        </Col>
+        <Col lg={4} span={24} className="search-name"  style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+        }}>
+        <Select
+            defaultValue="Choose Address"
+            style={{ width: "90%", height: "100%", }}
+            onChange={value => {
+            setRoomLocation(value)
+            }}
+            options={districts}
+        />
+        </Col>
+        <Col
+        lg={3}
+        span={24}
+        className="search-button"
+        style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+        }}
+        >
+        <Button
+            className="button-search"
+            type="primary"
+            style={{
+            height: "100%",
+            backgroundColor: "#DEB25F",
+            width: 125,
+            fontWeight: "bold",
+            }}
+            onClick={setUpdateProduct}
+        >
+            Search
+        </Button>
+        </Col>
+    </Row>
+  )
+}
