@@ -30,7 +30,7 @@ const MainCarousel: React.FC<MailCarouselProps> = ({slide}) => {
   }, [])
 
   return (
-    <div class="slide-home">
+    <div className="slide-home">
       <div className="search-bar-home">
         <SearchBar onChildData={handleData}/>
       </div>
