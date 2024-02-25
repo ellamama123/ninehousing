@@ -205,10 +205,9 @@ export default function ProductDetail() {
                         <Row>
                           {
                             product?.tags.general_amenities.map((value, index) => (
-                              <Col span={12}>
+                              <Col span={12} key={index}>
                                 <div
                                   style={{ display: "flex", alignItems: "center" }}
-                                  key={index}
                                 >
                                   <img
                                     width={20}
@@ -231,10 +230,9 @@ export default function ProductDetail() {
                         <Row>
                         {
                             product?.tags.outdoor_facilities.map((value, index) => (
-                              <Col span={12}>
+                              <Col span={12} key={index}>
                                 <div
                                   style={{ display: "flex", alignItems: "center" }}
-                                  key={index}
                                 >
                                   <img
                                     width={20}
