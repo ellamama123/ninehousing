@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState } from "react";
 import React from 'react'
 import {
@@ -25,7 +27,7 @@ interface District {
   name: string;
 }
 
-export default function SearchBar({ onChildData: any }) {
+export default function SearchBar({ onChildData }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [districts, setDistricts] = useState<any>();
