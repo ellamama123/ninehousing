@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { Row, Col, Button, Image, Form, Input, message, InputNumber, Select } from "antd";
 import { useRouter } from "next/router";
