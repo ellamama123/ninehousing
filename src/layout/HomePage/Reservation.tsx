@@ -205,7 +205,7 @@ export default function Reservation() {
             <Col span={24}>
               <Row style={{justifyContent: 'center'}}>
                 <Col span={24} lg={8}>
-                  <Form.Item name={"note"} rules={[{ type: "text" }]}>
+                  <Form.Item name={"note"}>
                     <Input style={{ width: "100%" }} placeholder="Note" />
                   </Form.Item>
                 </Col>
