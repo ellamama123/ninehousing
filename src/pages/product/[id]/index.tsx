@@ -400,7 +400,14 @@ export default function ProductDetail() {
               </h1>
               <Row gutter={24}>
                 {product?.related_rooms.slice(0,3).map((prd: any, index: any) => (
-                  <Link
+
+                  <Col
+                    className="related-product"
+                    lg={8}
+                    span={24}
+                    key={index}
+                  >
+                                      <Link
                     key={index}
                     href={
                       window.location.origin +
@@ -408,12 +415,6 @@ export default function ProductDetail() {
                       prd.id
                     }
                     title=""
-                  >
-                  <Col
-                    className="related-product"
-                    lg={8}
-                    span={24}
-                    key={index}
                   >
                     <Row>
                       <Col span={24}>
@@ -565,8 +566,8 @@ export default function ProductDetail() {
                         </div>
                       </Col>
                     </Row>
-                  </Col>
                   </Link>
+                  </Col>
                 ))}
               </Row>
             </div>
