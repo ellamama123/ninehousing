@@ -3,10 +3,6 @@ import {
   Row,
   Col,
   Input,
-  DatePicker,
-  Radio,
-  Checkbox,
-  Pagination,
   Select,
   Form,
   InputNumber,
@@ -15,6 +11,9 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useTrans from '../useTrans'
+import {useRouter} from 'next/router'; 
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -43,6 +42,8 @@ export default function Reservation() {
   const [roomLocation, setRoomLocation] = useState<any>();
   const [bedroom, setBedroom] = useState<any>();
   const [bathroom, setBathroom] = useState<any>();
+  const trans = useTrans()
+  const { locale } = useRouter()
 
   const onFinish = (values: any) => {
     axios
@@ -92,7 +93,7 @@ export default function Reservation() {
           marginTop: "50px",
         }}
       >
-        <h2 className="reservation-title">Make a reservation</h2>
+        <h2 className="reservation-title">{ trans.home.reservation }</h2>
         <Form
           {...layout}
           name="nest-messages"
@@ -109,25 +110,25 @@ export default function Reservation() {
               <Form.Item name={["Name"]} rules={[{ required: true }]} labelCol={{ span: 24 }}>
                 <Input
                   style={{ width: "100%" }}
-                  placeholder="Your Name"
+                  placeholder={ trans.reservation.name }
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Item>
             </Col>
             <Col span={24} lg={8}>
               <Form.Item name={"Email"} rules={[{ type: "email" }]}>
-                <Input style={{ width: "100%" }} placeholder="Your Email" />
+                <Input style={{ width: "100%" }} placeholder="Email" />
               </Form.Item>
             </Col>
             <Col span={24} lg={8}>
               <Form.Item name={["Phone"]}>
-                <Input style={{ width: "100%" }} placeholder="Your Phone" />
+                <Input style={{ width: "100%" }} placeholder={ trans.reservation.phone } />
               </Form.Item>
             </Col>
             <Col span={24} lg={8}>
               <Form.Item name={["location"]}>
                 <Select
-                  placeholder="Property Location"
+                  placeholder={ trans.reservation.location }
                   onChange={value => {
                     setRoomLocation(value)
                   }}
@@ -140,16 +141,16 @@ export default function Reservation() {
               <Form.Item name={["type"]}>
                 <Select
                   style={{ width: "100%" }}
-                  placeholder="Property Type"
+                  placeholder={ trans.reservation.type }
                   onChange={value => {
                     setRoomType(value)
                   }}
                   options={[
-                    { value: "0", label: "Property Type" },
-                    { value: "1", label: "Apartments" },
-                    { value: "2", label: "Serviced Apartments" },
-                    { value: "3", label: "Houses" },
-                    { value: "4", label: "Villas" },
+                    { value: "0", label: trans.reservation.type },
+                    { value: "1", label: trans.reservation.apar },
+                    { value: "2", label: trans.reservation.ser_apar },
+                    { value: "3", label: trans.reservation.house },
+                    { value: "4", label: trans.reservation.villa },
                   ]}
                 />
               </Form.Item>
@@ -163,7 +164,7 @@ export default function Reservation() {
                     setBedroom(value)
                   }}
                   options={[
-                    { value: "", label: "Bedroom" },
+                    { value: "", label: trans.reservation.be },
                     { value: "1", label: "1" },
                     { value: "2", label: "2" },
                     { value: "3", label: "3" },
@@ -183,7 +184,7 @@ export default function Reservation() {
                         setBathroom(value)
                       }}
                       options={[
-                      { value: "", label: "Bathroom" },
+                      { value: "", label: trans.reservation.ba },
                         { value: "1", label: "1" },
                         { value: "2", label: "2" },
                       ]}
@@ -192,12 +193,12 @@ export default function Reservation() {
                 </Col>
                 <Col span={12} lg={5}>
                   <Form.Item name={["min_price"]}>
-                    <InputNumber min={1} placeholder="Min Price" />
+                    <InputNumber min={1} placeholder={ trans.reservation.mi } />
                   </Form.Item>
                 </Col>
                 <Col span={12} lg={5}>
                   <Form.Item name={["max_price"]}>
-                    <InputNumber min={1} placeholder="Max Price" />
+                    <InputNumber min={1} placeholder={ trans.reservation.ma } />
                   </Form.Item>
                 </Col>
               </Row>  
@@ -227,7 +228,7 @@ export default function Reservation() {
               className="submit-reservation"
               htmlType="submit"
             >
-              Send Us
+              { trans.home.send_us }
             </Button>
           </Form.Item>
         </Form>

@@ -11,27 +11,34 @@ import Activity from '@/layout/HomePage/Actitvity';
 import Partner from '@/layout/HomePage/Partner';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [slide, setSlide] = useState([]);
   const [blog, setBlog] = useState([]);
   const [home, setHome] = useState([]);
-
+  const { locale } = useRouter()
   const getProduct = () => {
     axios
-      .get("https://web-developing.site/api/home")
+      .get("https://web-developing.site/api/home", {
+        params: {
+          lang: locale
+        },
+      })
       .then((response) => {
         setSlide(response.data.meta_info[0].images);
         setHome(response.data.rooms);
         setBlog(response.data.blogs);
-        
       });
   };
 
   useEffect(() => {
     getProduct();
   }, []);
-
+  
+  useEffect(() => {
+    getProduct();
+  }, [locale]);
   return (
     <>
       <Head>

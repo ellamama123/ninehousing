@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, Image, Button} from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import useTrans from '../useTrans'
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -14,9 +15,12 @@ const onChange = (currentSlide: number) => {
   console.log(currentSlide);
 };
 
-const Partner: React.FC = () => (
+const Partner: React.FC = () => {
+  const trans = useTrans()
+
+  return (
   <div className="container" style={{marginBottom: '80px'}}>
-    <p className="partner-title">Our partner</p>
+    <p className="partner-title">{trans.home.partner}</p>
     <div className="partner-wrap">
       <Carousel
         afterChange={onChange}
@@ -160,5 +164,6 @@ const Partner: React.FC = () => (
     </div>
   </div>
 );
+}
 
 export default Partner;

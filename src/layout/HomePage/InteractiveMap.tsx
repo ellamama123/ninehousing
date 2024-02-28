@@ -1,7 +1,11 @@
 import React from "react";
 import { Col, Divider, Row, Image } from "antd";
+import useTrans from '../useTrans'
 
-const InteractiveMap: React.FC = () => (
+const InteractiveMap: React.FC = () => {
+  const trans = useTrans()
+
+  return (
   <div className="interactive-map-wrap">
     <div className="container">
       <Row>
@@ -9,7 +13,7 @@ const InteractiveMap: React.FC = () => (
           <iframe src="https://www.google.com/maps/d/u/3/embed?mid=1YT1gyB8JWMM23tRdHdIHrz3AkBl99Ss&ehbc=2E312F" width="100%" height="400px"></iframe>
         </Col>
         <Col lg={12} span={24} style={{paddingLeft: '10px'}}>
-          <p className="wcu-title">Interactive map</p>
+          <p className="wcu-title">{ trans.home.map }</p>
           <p>The apartment buildings of XX</p>
 
           <Row className="wcu-content">
@@ -95,5 +99,6 @@ const InteractiveMap: React.FC = () => (
     </div>
   </div>
 );
+}
 
 export default InteractiveMap;

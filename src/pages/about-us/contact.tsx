@@ -3,6 +3,7 @@ import { Tabs, Image, Row, Col, Button, Form, Input, message } from "antd";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useTrans from '../../layout/useTrans'
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -21,6 +22,7 @@ type FieldType = {
 
 export default function Contact() {
   const [messageApi, contextHolder] = message.useMessage();
+  const trans = useTrans()  
 
   const onFinish = (values: any) => {
     axios.post('https://web-developing.site/api/customer-contact', {
@@ -40,10 +42,10 @@ export default function Contact() {
   return (
     <>
       {contextHolder}
-      <h1 className="contact-location-title" style={{ margin: '30px 0', fontSize: '48px' }}>Location map</h1>
+      <h1 className="contact-location-title" style={{ margin: '30px 0', fontSize: '48px' }}>{trans.contact.location}</h1>
         <iframe src="https://www.google.com/maps/d/u/3/embed?mid=1YT1gyB8JWMM23tRdHdIHrz3AkBl99Ss&ehbc=2E312F" width="100%" height="500px"></iframe>
       <div style={{ marginTop: '50px'}}>
-        <h1 className="contact-title" style={{ fontSize: '48px', width: '50%' }}>Get in touch with us by filling contact from below</h1>
+        <h1 className="contact-title" style={{ fontSize: '48px', width: '50%' }}>{trans.contact.desc}</h1>
         <div style={{ marginTop: '30px' }}>
           <Row>
             <Col lg={12} span={24}>
@@ -63,7 +65,7 @@ export default function Contact() {
                     { required: true, message: "Please input your username!" },
                   ]}
                 >
-                  <Input style={{ borderColor: '#3C3C3C'}} placeholder="Name" />
+                  <Input style={{ borderColor: '#3C3C3C'}} placeholder={trans.contact.name} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -72,7 +74,7 @@ export default function Contact() {
                     { required: true, message: "Please input your email!" },
                   ]}
                 >
-                  <Input style={{ borderColor: '#3C3C3C'}} placeholder="Email" />
+                  <Input style={{ borderColor: '#3C3C3C'}} placeholder={trans.contact.email} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -81,13 +83,13 @@ export default function Contact() {
                     { required: true, message: "Please input your phone!" },
                   ]}
                 >
-                  <Input style={{ borderColor: '#3C3C3C'}} placeholder="Phone" />
+                  <Input style={{ borderColor: '#3C3C3C'}} placeholder={trans.contact.phone} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                   name="subject"
                 >
-                  <Input style={{ borderColor: '#3C3C3C'}} placeholder="Subject" />
+                  <Input style={{ borderColor: '#3C3C3C'}} placeholder={trans.contact.subject} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -96,12 +98,12 @@ export default function Contact() {
                     { required: true, message: "Please input your message!" },
                   ]}
                 >
-                  <TextArea style={{ borderColor: '#3C3C3C'}} placeholder="Subject" rows={4} />
+                  <TextArea style={{ borderColor: '#3C3C3C'}} placeholder={trans.contact.message} rows={4} />
                 </Form.Item>
 
                 <Form.Item>
                   <Button style={{width: '100%', backgroundColor: '#DEB25F', fontWeight: '600'}} type="primary" htmlType="submit">
-                    Send message
+                    {trans.contact.send}
                   </Button>
                 </Form.Item>
               </Form>
@@ -116,7 +118,7 @@ export default function Contact() {
                   padding: "20px 20px 100px",
                 }}
               >
-                <h4 style={{ fontSize: '24px'}}>Contact detail</h4>
+                <h4 style={{ fontSize: '24px'}}>{trans.contact.detail}</h4>
                 <div style={{ marginTop: '5px' }}>
                   <div>
                     <Row style={{ marginTop: '10px' }}>

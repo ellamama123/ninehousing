@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, Row, Col, Image, Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import useTrans from '../useTrans'
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -15,11 +16,12 @@ const CustomerSay: React.FC = () => {
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
+  const trans = useTrans()
 
   return (
     <div className="customer">
       <div className="container">
-        <p className="customer-title">What customers say about us</p>
+        <p className="customer-title">{ trans.home.customer_say }</p>
         <div className="container-customer">
           <Carousel
             afterChange={onChange}

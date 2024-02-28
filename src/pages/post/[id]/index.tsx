@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../../../layout/Layout";
 import Link from "next/link";
+import useTrans from "../../../layout/useTrans";
 
 export default function PostDetail() {
   interface Post {
@@ -14,18 +15,37 @@ export default function PostDetail() {
   }
   const router = useRouter();
   const [post, setPost] = useState<{title: any, content: any, related_blogs: any}>();
+  const trans = useTrans()  
+  const { locale } = useRouter()
 
   useEffect(() => {
     let id = router.query.id;
 
     if (id) {
       axios
-        .get("https://web-developing.site/api/blogs/" + id)
+        .get("https://web-developing.site/api/blogs/" + id, {
+          params: {
+            lang: locale
+          },
+        })
         .then((response) => {
           setPost(response.data);
         });
     }
   }, [router.query.id]);
+
+  useEffect(() => {
+    let id = router.query.id;
+    axios
+        .get("https://web-developing.site/api/blogs/" + id, {
+          params: {
+            lang: locale
+          },
+        })
+        .then((response) => {
+          setPost(response.data);
+        });
+  }, [locale]);
 
   return (
     <>
@@ -53,7 +73,7 @@ export default function PostDetail() {
               fontFamily: "system-ui",
             }}
           >
-            Blog
+            {trans.post_detail.blog}
           </p>
         </div>
         <div style={{ marginTop: "100px", marginBottom: "50px", width: "80%", margin: "0 auto", paddingBottom: '50px' }}>
@@ -88,7 +108,7 @@ export default function PostDetail() {
                       fontWeight: "bold",
                     }}
                   >
-                    Related blog posts
+                    {trans.post_detail.related_blog}
                   </p>
                   {
                     post?.related_blogs.slice(-2).map((blog: any , index: any) => (

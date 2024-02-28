@@ -1,12 +1,16 @@
 import React from "react";
 import { Col, Divider, Row, Image } from "antd";
+import useTrans from '../useTrans'
 
-const WhyChooseUs: React.FC = () => (
+const WhyChooseUs: React.FC = () => {
+  const trans = useTrans()
+
+  return (
   <div className="container">
-    <p className="wcu-title">Why Choose Us</p>
+    <p className="wcu-title">{ trans.home.wcu }</p>
     <Row className="wcu-content-wrap">
       <Col className="wcu-image" lg={12} span={24} order={2}>
-        <Image src="/image/product-1.png"></Image>
+        <Image src="/image/product-1.png" alt=""></Image>
       </Col>
       <Col lg={12} span={24} order={1} style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingRight: '40px'}}>
         <Row className="wcu-content">
@@ -30,8 +34,7 @@ const WhyChooseUs: React.FC = () => (
           </Col>
           <Col lg={22} span={20}>
             <span>
-              20 years in the serviced rental housing market with apartments
-              that we design, build, and manage internally.
+              { trans.home.wcu_1 }
             </span>
           </Col>
         </Row>
@@ -56,7 +59,7 @@ const WhyChooseUs: React.FC = () => (
           </Col>
           <Col lg={22} span={20}>
             <span>
-              Beautiful, serene apartments amongst Hanoi’s most livable neighborhoods.
+              { trans.home.wcu_2 }
             </span>
           </Col>
         </Row>
@@ -81,8 +84,7 @@ const WhyChooseUs: React.FC = () => (
           </Col>
           <Col lg={22} span={20}>
             <span>
-              20 years in the serviced rental housing market with apartments
-              that we design, build, and manage internally.
+            { trans.home.wcu_1 }
             </span>
           </Col>
         </Row>
@@ -107,8 +109,7 @@ const WhyChooseUs: React.FC = () => (
           </Col>
           <Col lg={22} span={20}>
             <span>
-              20 years in the serviced rental housing market with apartments
-              that we design, build, and manage internally.
+              { trans.home.wcu_2 }
             </span>
           </Col>
         </Row>
@@ -133,8 +134,7 @@ const WhyChooseUs: React.FC = () => (
           </Col>
           <Col lg={22} span={20}>
             <span>
-              20 years in the serviced rental housing market with apartments
-              that we design, build, and manage internally.
+              { trans.home.wcu_1 }
             </span>
           </Col>
         </Row>
@@ -142,5 +142,5 @@ const WhyChooseUs: React.FC = () => (
     </Row>
   </div>
 );
-
+}
 export default WhyChooseUs;

@@ -14,6 +14,7 @@ import Head from "next/head";
 import Layout from "../../layout/Layout";
 import SearchBar from "../../layout/SearchBar";
 import { useRouter } from 'next/router';
+import useTrans from '../../layout/useTrans'
 
 const optionPrice = [
   { label: "50$ & below ", value: "Lessthan50" },
@@ -36,7 +37,8 @@ export default function Home() {
   const [pageIndex, setPageIndex] = useState(0);
   const router = useRouter();
   const { name_search, price_search, startDate_search, endDate_search, roomLocation_search } = router.query;
-  
+  const trans = useTrans()  
+  const { locale } = useRouter()
 
   useEffect(() => {
     if(name_search || price_search || startDate_search || endDate_search || roomLocation_search) {
@@ -55,6 +57,10 @@ export default function Home() {
     getProduct();
   }, [pageIndex]);
 
+  useEffect(() => {
+    getProduct();
+  }, [locale]);
+
   const getProduct = () => {
     axios
       .get("https://web-developing.site/api/rooms?page=" + pageIndex, {
@@ -64,7 +70,8 @@ export default function Home() {
           "sortDesc[]": sort,
           startDate: startDate,
           endDate: endDate,
-          district: roomLocation
+          district: roomLocation,
+          lang: locale
         },
       })
       .then((response) => {
@@ -126,9 +133,9 @@ export default function Home() {
                         className="product-list-text"
                         style={{ fontSize: "48px" }}
                       >
-                        Product List
+                        {trans.product.list}
                       </h1>
-                      <p style={{ fontWeight: 600, marginTop: 20 }}>Sort by</p>
+                      <p style={{ fontWeight: 600, marginTop: 20 }}>{trans.product.sort}</p>
                       <Row style={{ marginTop: 20 }}>
                         <Button
                           type="primary"
@@ -139,7 +146,7 @@ export default function Home() {
                           }}
                           onClick={getProduct}
                         >
-                          Best match
+                          {trans.product.match}
                         </Button>
                         <Button
                           type="primary"
@@ -153,7 +160,7 @@ export default function Home() {
                             getProduct();
                           }}
                         >
-                          Lowest price first
+                          {trans.product.lowest}
                         </Button>
                       </Row>
                     </div>
@@ -181,7 +188,7 @@ export default function Home() {
                           >
                             <h1>{prd.name}</h1>
                             <p style={{ marginTop: 15 }}>{prd.address}</p>
-                            <p style={{ marginTop: 15 }} className="prd-des">{prd.description}</p>
+                            <p style={{ marginTop: 15 }} className="prd-des" dangerouslySetInnerHTML={{ __html: prd.description }} />
                             <Row style={{ marginTop: 15 }}>
                               <Col
                                 lg={3}
@@ -191,8 +198,8 @@ export default function Home() {
                                   alignItems: "center",
                                 }}
                               >
-                                <img width={20} src={`icon/bed.png`} />
-                                <span>{prd.bedroom} Br</span>
+                                <img width={20} src={`/icon/bed.png`} />
+                                <span>{prd.bedroom} {trans.product.br}</span>
                               </Col>
                               <Col
                                 lg={3}
@@ -202,8 +209,8 @@ export default function Home() {
                                   alignItems: "center",
                                 }}
                               >
-                                <img width={20} src={`icon/water.png`} />
-                                <span>{prd.bathroom} Ba</span>
+                                <img width={20} src={`/icon/water.png`} />
+                                <span>{prd.bathroom} {trans.product.ba}</span>
                               </Col>
                               <Col
                                 lg={3}
@@ -215,7 +222,7 @@ export default function Home() {
                               >
                                 <img
                                   width={20}
-                                  src={`icon/square-Medical.png`}
+                                  src={`/icon/square-Medical.png`}
                                   alt=""
                                 />
                                 <span>{prd.acreage}</span>
@@ -253,7 +260,7 @@ export default function Home() {
                                     }
                                     title=""
                                   >
-                                    <span>Book now</span>
+                                    <span>{trans.product.book}</span>
                                   </Link>
                                 </Button>
                               </Col>

@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Button, Row, Image, Carousel } from "antd";
 import Link from "next/link";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import useTrans from '../useTrans'
 
 interface OurApartmentsProps {
   home: Array<any>; // Change `any` to the actual type of your items in the array
@@ -10,11 +11,12 @@ interface OurApartmentsProps {
 const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => {
   const onChange = (currentSlide: number) => {
   };
+  const trans = useTrans()
 
   return (
   <div className="oap-wrap">
     <div className="container">
-      <p className="oap-title">Our apartments</p>
+      <p className="oap-title">{ trans.home.our_apart }</p>
       <div className="oap-wrap-slide">
       <Carousel
         afterChange={onChange}
@@ -68,7 +70,7 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => {
                       borderRadius: "10px",
                     }}
                   >
-                    Available
+                    { trans.home.available }
                   </div>
                 </div>
 
@@ -158,7 +160,7 @@ const OurApartments: React.FC<OurApartmentsProps> = ({ home }) => {
                               padding: "7px 20px",
                             }}
                           >
-                            Book now
+                          { trans.home.book }
                           </Button>
                           </Link>
                         </Col>

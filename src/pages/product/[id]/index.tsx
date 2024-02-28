@@ -1,12 +1,23 @@
 // @ts-nocheck
 
 import React from "react";
-import { Row, Col, Button, Image, Form, Input, message, InputNumber, Select } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Image,
+  Form,
+  Input,
+  message,
+  InputNumber,
+  Select,
+} from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Head from "next/head";
 import Layout from "../../../layout/Layout";
+import useTrans from "../../../layout/useTrans";
 import Link from "next/link";
 
 const layout = {
@@ -31,8 +42,22 @@ interface District {
 }
 
 export default function ProductDetail() {
+  const trans = useTrans();
+  const { locale } = useRouter()
   const router = useRouter();
-  const [product, setProduct] = useState<{images: any, name: any, address: any, bathroom: any, bedroom: any, acreage: any, price: any, unit: any, description: any, related_rooms: any, view_count: any}>();
+  const [product, setProduct] = useState<{
+    images: any;
+    name: any;
+    address: any;
+    bathroom: any;
+    bedroom: any;
+    acreage: any;
+    price: any;
+    unit: any;
+    description: any;
+    related_rooms: any;
+    view_count: any;
+  }>();
   const [email, setEmail] = useState<string>();
   const [messageApi, contextHolder] = message.useMessage();
   const [roomType, setRoomType] = useState<any>();
@@ -46,7 +71,9 @@ export default function ProductDetail() {
 
     if (id) {
       axios
-        .get("https://web-developing.site/api/rooms/" + id)
+        .get("https://web-developing.site/api/rooms/" + id, {
+          
+        })
         .then((response) => {
           setProduct(response.data);
         });
@@ -54,14 +81,22 @@ export default function ProductDetail() {
   }, [router.query.id]);
 
   useEffect(() => {
-    axios.get("https://web-developing.site/api/locations/1")
-    .then((response: any) => {
-      let districtList: District[] = response.data.districts;
-      setDistricts([
-        ...districtList?.map(district => ({ value: district.code, label: district.name }))
-      ])
-    })
-  }, [])
+    getProduct();
+  }, [locale]);
+
+  useEffect(() => {
+    axios
+      .get("https://web-developing.site/api/locations/1")
+      .then((response: any) => {
+        let districtList: District[] = response.data.districts;
+        setDistricts([
+          ...districtList?.map((district) => ({
+            value: district.code,
+            label: district.name,
+          })),
+        ]);
+      });
+  }, []);
 
   const onFinish = (values: any) => {
     let id = router.query.id;
@@ -76,7 +111,7 @@ export default function ProductDetail() {
         room_type: roomType,
         bedroom: bedroom,
         bathroom: bathroom,
-        note: values.note
+        note: values.note,
       })
       .then((response) => {
         messageApi.success("Room reservation request has been sent.", 1);
@@ -122,23 +157,29 @@ export default function ProductDetail() {
                   </Col>
                   <Col lg={12} span={24} className="product-image-small-wrap">
                     <Row>
-                      {product?.images.slice(1, 5).map((image: any, index: any) => (
-                        <Col span={12} key={index}>
-                          <div
-                            className={`image-small-wrap ${index == 3 || index == 2 ? 'marginTop' : ''} ${index == 0 || index == 2 ? 'marginRight' : ''}`}
-                          >
-                            <div className="hover-image">
-                              <Image
-                                className="product-image-small"
-                                width={"100%"}
-                                alt=""
-                                src={image}
-                                fallback="data:image/png;base64,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"
-                              />
+                      {product?.images
+                        .slice(1, 5)
+                        .map((image: any, index: any) => (
+                          <Col span={12} key={index}>
+                            <div
+                              className={`image-small-wrap ${
+                                index == 3 || index == 2 ? "marginTop" : ""
+                              } ${
+                                index == 0 || index == 2 ? "marginRight" : ""
+                              }`}
+                            >
+                              <div className="hover-image">
+                                <Image
+                                  className="product-image-small"
+                                  width={"100%"}
+                                  alt=""
+                                  src={image}
+                                  fallback="data:image/png;base64,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"
+                                />
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                      ))}
+                          </Col>
+                        ))}
                     </Row>
                   </Col>
                 </Row>
@@ -149,11 +190,12 @@ export default function ProductDetail() {
                 <Col lg={14} span={24}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <img
+                      alt=""
                       width={20}
                       style={{ marginRight: "10px" }}
                       src={`/icon/eye.png`}
                     />
-                    <span>{product?.view_count} Views</span>
+                    <span>{product?.view_count} {trans.product_detail.view}</span>
                   </div>
                   <div>
                     <Row>
@@ -166,23 +208,23 @@ export default function ProductDetail() {
                             span={8}
                             style={{ display: "flex", alignItems: "center" }}
                           >
-                            <img width={20} src={`/icon/bed.png`} />
-                            <span>{product?.bedroom} Br</span>
+                            <img alt="" width={20} src={`/icon/bed.png`} />
+                            <span>{product?.bedroom} {trans.product_detail.br}</span>
                           </Col>
                           <Col
                             lg={4}
                             span={8}
                             style={{ display: "flex", alignItems: "center" }}
                           >
-                            <img width={20} src={`/icon/water.png`} />
-                            <span>{product?.bathroom} Ba</span>
+                            <img alt="" width={20} src={`/icon/water.png`} />
+                            <span>{product?.bathroom} {trans.product_detail.ba}</span>
                           </Col>
                           <Col
                             lg={4}
                             span={8}
                             style={{ display: "flex", alignItems: "center" }}
                           >
-                            <img width={20} src={`/icon/square-Medical.png`} />
+                            <img alt="" width={20} src={`/icon/square-Medical.png`} />
                             <span>{product?.acreage} Sq.Ft</span>
                           </Col>
                         </Row>
@@ -193,25 +235,32 @@ export default function ProductDetail() {
                         </h2>
                       </Col>
                     </Row>
-                    <Row style={{flexDirection: 'column'}}>
+                    <Row style={{ flexDirection: "column" }}>
                       <Col span={24}>
                         <div style={{ marginTop: "50px" }}>
-                          <h3 style={{ marginBottom: "20px" }}>Description</h3>
-                          <p dangerouslySetInnerHTML={{ __html: product?.description }} />
+                          <h3 style={{ marginBottom: "20px" }}>{trans.product_detail.desc}</h3>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: product?.description,
+                            }}
+                          />
                         </div>
                       </Col>
                       <div style={{ marginTop: "50px" }}>
                         <h3 style={{ marginBottom: "20px" }}>
-                          General amenities
+                        {trans.product_detail.general}
                         </h3>
                         <Row>
-                          {
-                            product?.tags.general_amenities.map((value, index) => (
-                              <Col span={12} key={index}>
+                          {product?.tags.general_amenities.map(
+                            (value, index) => (
+                              <Col span={12} key={index} style={{marginTop: '10px'}}>
                                 <div
-                                  style={{ display: "flex", alignItems: "center" }}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
                                 >
-                                  <img
+                                  <Image
                                     width={20}
                                     style={{ marginRight: "20px" }}
                                     alt=""
@@ -220,23 +269,25 @@ export default function ProductDetail() {
                                   <span>{value}</span>
                                 </div>
                               </Col>
-                            ))
-                          }
-
+                            )
+                          )}
                         </Row>
                       </div>
                       <div style={{ marginTop: "50px" }}>
                         <h3 style={{ marginBottom: "20px" }}>
-                          Outdoor facilities
+                        {trans.product_detail.outdoor}
                         </h3>
                         <Row>
-                        {
-                            product?.tags.outdoor_facilities.map((value, index) => (
-                              <Col span={12} key={index}>
+                          {product?.tags.outdoor_facilities.map(
+                            (value, index) => (
+                              <Col span={12} key={index} style={{marginTop: '10px'}}>
                                 <div
-                                  style={{ display: "flex", alignItems: "center" }}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
                                 >
-                                  <img
+                                  <Image
                                     width={20}
                                     style={{ marginRight: "20px" }}
                                     alt=""
@@ -245,8 +296,8 @@ export default function ProductDetail() {
                                   <span>{value}</span>
                                 </div>
                               </Col>
-                            ))
-                          }
+                            )
+                          )}
                         </Row>
                       </div>
                     </Row>
@@ -277,7 +328,7 @@ export default function ProductDetail() {
                       marginTop: "50px",
                     }}
                   >
-                    <h2>Make a reservation</h2>
+                    <h2>{trans.product_detail.reservation}</h2>
                     <Form
                       {...layout}
                       name="nest-messages"
@@ -292,7 +343,7 @@ export default function ProductDetail() {
                       <Form.Item name={["Name"]} rules={[{ required: true }]}>
                         <Input
                           style={{ width: "310px" }}
-                          placeholder="Your Name"
+                          placeholder={ trans.reservation.name }
                         />
                       </Form.Item>
                       <Form.Item name={"Email"} rules={[{ type: "email" }]}>
@@ -304,14 +355,14 @@ export default function ProductDetail() {
                       <Form.Item name={["Phone"]}>
                         <Input
                           style={{ width: "310px" }}
-                          placeholder="Your Phone"
+                          placeholder={ trans.reservation.phone }
                         />
                       </Form.Item>
                       <Form.Item name={["location"]}>
                         <Select
-                          placeholder="Property Location"
-                          onChange={value => {
-                            setRoomLocation(value)
+                          placeholder={ trans.reservation.location }
+                          onChange={(value) => {
+                            setRoomLocation(value);
                           }}
                           style={{ width: "100%" }}
                           options={districts}
@@ -319,16 +370,16 @@ export default function ProductDetail() {
                       </Form.Item>
                       <Form.Item name={["type"]}>
                         <Select
-                          defaultValue={{ value: "0", label: "Property Type" }}
-                          onChange={value => {
-                            setRoomType(value)
+                          placeholder={ trans.reservation.type }
+                          onChange={(value) => {
+                            setRoomType(value);
                           }}
                           options={[
-                            { value: "0", label: "Property Type" },
-                            { value: "1", label: "Apartments" },
-                            { value: "2", label: "Serviced Apartments" },
-                            { value: "3", label: "Houses" },
-                            { value: "4", label: "Villas" },
+                            { value: "0", label: trans.reservation.type },
+                            { value: "1", label: trans.reservation.apar },
+                            { value: "2", label: trans.reservation.ser_apar },
+                            { value: "3", label: trans.reservation.house },
+                            { value: "4", label: trans.reservation.villa },
                           ]}
                         />
                       </Form.Item>
@@ -336,15 +387,15 @@ export default function ProductDetail() {
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
-                          onChange={value => {
-                            setBedroom(value)
+                          onChange={(value) => {
+                            setBedroom(value);
                           }}
                           options={[
-                            { value: '', label: 'Bedroom' },
-                            { value: '1', label: '1' },
-                            { value: '2', label: '2' },
-                            { value: '3', label: '3' },
-                            { value: '4', label: '4' },
+                            { value: "", label: trans.reservation.be },
+                            { value: "1", label: "1" },
+                            { value: "2", label: "2" },
+                            { value: "3", label: "3" },
+                            { value: "4", label: "4" },
                           ]}
                         />
                       </Form.Item>
@@ -352,26 +403,26 @@ export default function ProductDetail() {
                         <Select
                           defaultValue=""
                           style={{ width: "100%" }}
-                          onChange={value => {
-                            setBathroom(value)
+                          onChange={(value) => {
+                            setBathroom(value);
                           }}
                           options={[
-                            { value: '', label: 'Bathroom' },
-                            { value: '1', label: '1' },
-                            { value: '2', label: '2' },
+                            { value: "", label: trans.reservation.ba },
+                            { value: "1", label: "1" },
+                            { value: "2", label: "2" },
                           ]}
                         />
                       </Form.Item>
                       <Form.Item name={["min_price"]}>
-                        <InputNumber min={1} placeholder="Min Price" />
+                        <InputNumber min={1} placeholder={ trans.reservation.mi } />
                       </Form.Item>
                       <Form.Item name={["max_price"]}>
-                        <InputNumber min={1} placeholder="Max Price" />
+                        <InputNumber min={1} placeholder={ trans.reservation.ma } />
                       </Form.Item>
                       <Form.Item name={["note"]}>
                         <Input
-                            style={{ width: "310px" }}
-                            placeholder="Your Note"
+                          style={{ width: "310px" }}
+                          placeholder="Note"
                         />
                       </Form.Item>
                       <Form.Item
@@ -386,7 +437,7 @@ export default function ProductDetail() {
                           }}
                           htmlType="submit"
                         >
-                          Send Us
+                          {trans.product_detail.send}
                         </Button>
                       </Form.Item>
                     </Form>
@@ -396,163 +447,162 @@ export default function ProductDetail() {
             </div>
             <div style={{ marginTop: "75px" }}>
               <h1 style={{ marginBottom: "25px", fontFamily: "system-ui" }}>
-                Related properties
+              {trans.product_detail.related}
               </h1>
               <Row gutter={24}>
-                {product?.related_rooms.slice(0,3).map((prd: any, index: any) => (
-
-                  <Col
-                    className="related-product"
-                    lg={8}
-                    span={24}
-                    key={index}
-                  >
-                                      <Link
-                    key={index}
-                    href={
-                      window.location.origin +
-                      "/product/" +
-                      prd.id
-                    }
-                    title=""
-                  >
-                    <Row>
-                      <Col span={24}>
-                        <div>
-                          <Image
-                            alt="test"
-                            width={"100%"}
-                            style={{
-                              aspectRatio: '3 / 2', 
-                              objectFit: 'cover'
-                            }}
-                            src={prd.thumbnail}
-                            preview={false}
-                          />
-                          <div
-                            style={{
-                              position: "absolute",
-                              left: "1rem",
-                              top: "1rem",
-                              background: "#DEB25F",
-                              padding: "0.5rem 1rem",
-                              borderRadius: "10px",
-                            }}
-                          >
-                            Available
-                          </div>
-                        </div>
-
-                        <div
-                          style={{
-                            border: "1px solid",
-                            borderEndStartRadius: "5px",
-                            borderBottomRightRadius: "5px",
-                            borderTop: "none",
-                          }}
-                        >
-                          <div>
-                            <div style={{ padding: "20px" }}>
-                              <Row
+                {product?.related_rooms
+                  .slice(0, 3)
+                  .map((prd: any, index: any) => (
+                    <Col
+                      className="related-product"
+                      lg={8}
+                      span={24}
+                      key={index}
+                    >
+                      <Link
+                        key={index}
+                        href={window.location.origin + "/product/" + prd.id}
+                        title=""
+                      >
+                        <Row>
+                          <Col span={24}>
+                            <div>
+                              <Image
+                                alt="test"
+                                width={"100%"}
                                 style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  marginTop: "10px",
+                                  aspectRatio: "3 / 2",
+                                  objectFit: "cover",
+                                }}
+                                src={prd.thumbnail}
+                                preview={false}
+                              />
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: "1rem",
+                                  top: "1rem",
+                                  background: "#DEB25F",
+                                  padding: "0.5rem 1rem",
+                                  borderRadius: "10px",
                                 }}
                               >
-                                <Col span={24}>
-                                  <p
-                                    style={{
-                                      fontSize: "20px",
-                                      fontWeight: "bold",
-                                    }}
-                                  >
-                                    {prd?.name}
-                                  </p>
-                                </Col>
-                                <Col span={24}>
-                                  <p style={{marginTop: '10px'}}>
-                                    {prd?.address}
-                                  </p>
-                                </Col>
-                              </Row>
-                              <Row style={{ marginTop: 25 }}>
-                                <Col
-                                  span={8}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <img width={20} src={`/icon/bed.png`} />
-                                  <span>{prd?.bathroom} Br</span>
-                                </Col>
-                                <Col
-                                  span={8}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <img width={20} src={`/icon/water.png`} />
-                                  <span style={{ marginLeft: "10px" }}>
-                                    {prd?.bedroom} Ba
-                                  </span>
-                                </Col>
-                                <Col
-                                  span={8}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <img
-                                    width={20}
-                                    src={`/icon/square-Medical.png`}
-                                  />
-                                  <span>{prd?.acreage} Sq.Ft</span>
-                                </Col>
-                              </Row>
+                                {trans.product_detail.available}
+                              </div>
                             </div>
+
                             <div
                               style={{
-                                padding: "25px 20px",
-                                borderTop: "1px solid",
+                                border: "1px solid",
+                                borderEndStartRadius: "5px",
+                                borderBottomRightRadius: "5px",
+                                borderTop: "none",
                               }}
                             >
-                              <Row
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <Col span={12}>
-                                  <h2>${prd?.price}/{prd?.unit}</h2>
-                                </Col>
-                                <Col
-                                  span={12}
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "flex-end",
-                                  }}
-                                >
-                                  <Button
-                                    type="primary"
+                              <div>
+                                <div style={{ padding: "20px" }}>
+                                  <Row
                                     style={{
-                                      height: "100%",
-                                      backgroundColor: "#DEB25F",
-                                      color: "black",
-                                      fontWeight: "bold",
-                                      padding: "7px 20px",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginTop: "10px",
                                     }}
                                   >
-                                  Book now
-                                  </Button>
-                                </Col>
-                              </Row>
-                            </div>
-                          </div>
-                          {/* <p style={{ fontSize: "20px", fontWeight: "bold" }}>
+                                    <Col span={24}>
+                                      <p
+                                        style={{
+                                          fontSize: "20px",
+                                          fontWeight: "bold",
+                                        }}
+                                      >
+                                        {prd?.name}
+                                      </p>
+                                    </Col>
+                                    <Col span={24}>
+                                      <p style={{ marginTop: "10px" }}>
+                                        {prd?.address}
+                                      </p>
+                                    </Col>
+                                  </Row>
+                                  <Row style={{ marginTop: 25 }}>
+                                    <Col
+                                      span={8}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <img width={20} src={`/icon/bed.png`} />
+                                      <span>{prd?.bathroom} {trans.product_detail.br}</span>
+                                    </Col>
+                                    <Col
+                                      span={8}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <img width={20} src={`/icon/water.png`} />
+                                      <span style={{ marginLeft: "10px" }}>
+                                        {prd?.bedroom} {trans.product_detail.ba}
+                                      </span>
+                                    </Col>
+                                    <Col
+                                      span={8}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <img
+                                        width={20}
+                                        src={`/icon/square-Medical.png`}
+                                      />
+                                      <span>{prd?.acreage} Sq.Ft</span>
+                                    </Col>
+                                  </Row>
+                                </div>
+                                <div
+                                  style={{
+                                    padding: "25px 20px",
+                                    borderTop: "1px solid",
+                                  }}
+                                >
+                                  <Row
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <Col span={12}>
+                                      <h2>
+                                        ${prd?.price}/{prd?.unit}
+                                      </h2>
+                                    </Col>
+                                    <Col
+                                      span={12}
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                      }}
+                                    >
+                                      <Button
+                                        type="primary"
+                                        style={{
+                                          height: "100%",
+                                          backgroundColor: "#DEB25F",
+                                          color: "black",
+                                          fontWeight: "bold",
+                                          padding: "7px 20px",
+                                        }}
+                                      >
+                                        {trans.product_detail.book}
+                                      </Button>
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </div>
+                              {/* <p style={{ fontSize: "20px", fontWeight: "bold" }}>
                   HAVING PETS IN A TOAN TIEN APARTMENT (FT. THE PETS...
                 </p>
                 <p style={{ fontSize: "18px" }}>
@@ -563,12 +613,12 @@ export default function ProductDetail() {
                 <Button style={{ backgroundColor: "#DEB25F", color: "white" }}>
                   View more
                 </Button> */}
-                        </div>
-                      </Col>
-                    </Row>
-                  </Link>
-                  </Col>
-                ))}
+                            </div>
+                          </Col>
+                        </Row>
+                      </Link>
+                    </Col>
+                  ))}
               </Row>
             </div>
           </div>

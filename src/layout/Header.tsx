@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+// @ts-nocheck
+
 import React, { useState, useEffect } from "react";
 import {useRouter} from 'next/router'; 
 
@@ -14,8 +17,10 @@ import {
 import { MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import useTrans from './useTrans'
 
 const content = () => {
+  const trans = useTrans()
 
   return (
   <Menu
@@ -24,16 +29,16 @@ const content = () => {
   overflowedIndicator={<MenuOutlined />}
 >
   <Menu.Item key="">
-    <Link href="/"> Home </Link>
+    <Link href="/"><p> { trans.home.title } </p></Link>
   </Menu.Item>
   <Menu.Item key="/product">
-    <Link href="/product"> Our Product </Link>
+    <Link href="/product"><p> { trans.home.product } </p></Link>
   </Menu.Item>
   <Menu.Item key="/post">
-    <Link href="/post"> Blog </Link>
+    <Link href="/post"><p> { trans.home.blog } </p></Link>
   </Menu.Item>
   <Menu.Item key="/about-us">
-    <Link href="/about-us"> About Us </Link>
+    <Link href="/about-us"><p> { trans.home.about_us } </p></Link>
   </Menu.Item>
 </Menu>);
 };
@@ -44,22 +49,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const router = useRouter() 
-
-  useEffect(() => {
-    // const handleScroll = () => {
-    //   if (window.scrollY > 200) {
-    //     setScrolled(true);
-    //   } else {
-    //     setScrolled(false);
-    //   }
-    // };
-
-    // window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      // window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const { locale } = useRouter()
 
   const showDrawer = () => {
     setVisible(true);
@@ -68,6 +58,17 @@ const Header = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const trans = useTrans()
+  
+  const changeLang = (lang) => {
+    const currentPath = router.asPath;
+    const newPath = `/${lang}${currentPath}`;
+    router.push(newPath, undefined, { locale: lang });
+  }
+
+  const handleLanguageChange = (value) => {
+      changeLang(value);
+  }
 
   return (
     <div className={`menu ${scrolled ? 'scrolled-menu' : ''} ${router.pathname !== "/" ? ' product' : '' }`}>
@@ -100,13 +101,10 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            {/* <div>
-              <Select
-                defaultValue="Tiếng Việt"
-                style={{ width: 120 }}
-                options={[{ value: "Tiếng Việt", label: "Tiếng Việt" }]}
-              />
-            </div> */}
+            <Select defaultValue={locale} onChange={handleLanguageChange}>
+              <Select.Option value="vi">Tiếng Việt</Select.Option>
+              <Select.Option value="en">English</Select.Option>
+          </Select>
           </Col>
         </Row>
       </div>
@@ -120,20 +118,20 @@ const Header = () => {
         <Drawer placement="right" onClose={onClose} visible={visible}>
           <div style={{ display: "flex", flexDirection: "column", }}>
             <Button type="text" href="/">
-            Home
+            <p> { trans.home.title } </p>
             </Button>
 
             <Button type="text" href="/product">
-            Our Product
+            <p> { trans.home.product } </p>
             </Button>
             <Button
               type="text"
               href="/post"
             >
-              Blog
+              <p> { trans.home.blog } </p>
             </Button>
             <Button type="text" href="/about-us">
-              About us
+            <p> { trans.home.about_us } </p>
             </Button>
             <div style={{ marginTop: '20px', display: "flex", alignItems: "center",  justifyContent: "center" }}>
               {/* <Select

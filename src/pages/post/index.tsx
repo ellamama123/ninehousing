@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../../layout/Layout";
+import useTrans from '../../layout/useTrans'
+import { useRouter } from 'next/router'
 
 export default function Post() {
   const [post, setPost] = useState<{thumbnail: any,title: any, content: any, id: any, created_at: any, description: any}[]>([]);
   const [perPage, setPerPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
+  const trans = useTrans()  
+  const { locale } = useRouter()
 
   useEffect(() => {
     getPost();
@@ -19,10 +23,18 @@ export default function Post() {
     getPost();
   }, [pageIndex]);
 
+  useEffect(() => {
+    getPost();
+  }, [locale]);
+
   const getPost = () => {
     axios
       .get(
-        "https://web-developing.site/api/blogs?categories[]=2&categories[]=4"
+        "https://web-developing.site/api/blogs?categories[]=2&categories[]=4", {
+          params: {
+            lang: locale
+          },
+        }
       )
       .then((response) => {
         setPost(response.data.data);
@@ -81,7 +93,7 @@ export default function Post() {
               fontFamily: "system-ui",
             }}
           >
-            Blog
+            {trans.post.post}
           </p>
         </div>
         <div style={{ marginTop: "100px", width: "80%", margin: "0 auto" }}>
@@ -149,7 +161,7 @@ export default function Post() {
                             href={window.location.origin + "/post/" + data?.id}
                             title=""
                           >
-                            <span>View more</span>
+                            <span>{trans.post.view_more}</span>
                             
                           </Link>
                         </Button>

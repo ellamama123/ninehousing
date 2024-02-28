@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Divider, Row } from "antd";
+import useTrans from '../useTrans'
 
 const style: React.CSSProperties = {
   background: "#000000",
@@ -8,7 +9,10 @@ const style: React.CSSProperties = {
   borderRadius: "10px",
 };
 
-const DivOne: React.FC = () => (
+const DivOne: React.FC = () => {
+  const trans = useTrans()
+
+  return (
   <div className="div-one">
     <div className="container">
       <Row gutter={24}>
@@ -16,8 +20,7 @@ const DivOne: React.FC = () => (
           <div style={style}>
             <p className="div-one-number"> +30 </p>
             <p className="div-one-description">
-              {" "}
-              Apartment{" "}
+              { trans.home.apartment }
             </p>
           </div>
         </Col>
@@ -26,7 +29,7 @@ const DivOne: React.FC = () => (
             <p className="div-one-number"> +2000 </p>
             <p className="div-one-description">
               {" "}
-              Apartment Viewed
+              { trans.home.apartment_viewed }
               {" "}
             </p>
           </div>
@@ -36,7 +39,7 @@ const DivOne: React.FC = () => (
             <p className="div-one-number"> +30 </p>
             <p className="div-one-description">
               {" "}
-              Booked{" "}
+              { trans.home.booked }{" "}
             </p>
           </div>
         </Col>
@@ -44,5 +47,6 @@ const DivOne: React.FC = () => (
     </div>
   </div>
 );
+}
 
 export default DivOne;

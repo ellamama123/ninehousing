@@ -5,10 +5,13 @@ import Regulation from "./regulation";
 import AboutUs from "./about-us";
 import Head from "next/head";
 import Layout from "../../layout/Layout";
+import useTrans from '../../layout/useTrans'
 
 const { TabPane } = Tabs;
 
 export default function PostDetail() {
+  const trans = useTrans()  
+
   return (
     <>
       <Head>
@@ -35,7 +38,7 @@ export default function PostDetail() {
               fontFamily: "system-ui",
             }}
           >
-            About us
+            {trans.contact.about_us}
           </p>
         </div>
         <div style={{ marginTop: "100px", marginBottom: "50px", width: "80%", margin: "0 auto", padding: "80px 0" }}>
@@ -46,7 +49,7 @@ export default function PostDetail() {
             <TabPane
               tab={
                 <Button className="tab-button" type="primary">
-                  About us
+                  {trans.contact.about_us}
                 </Button>
               }
               key="1"
@@ -56,7 +59,7 @@ export default function PostDetail() {
             <TabPane
               tab={
                 <Button className="tab-button" type="primary">
-                  Regulation
+                  {trans.contact.regulation}
                 </Button>
               }
               key="2"
@@ -66,7 +69,7 @@ export default function PostDetail() {
             <TabPane
               tab={
                 <Button className="tab-button" type="primary">
-                  Contact
+                  {trans.contact.contact}
                 </Button>
               }
               key="3"

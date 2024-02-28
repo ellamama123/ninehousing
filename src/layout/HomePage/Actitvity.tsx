@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Button, Row, Image, Carousel } from "antd";
 import Link from "next/link";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import useTrans from '../useTrans'
 
 interface ActivityProps {
   blog: Array<any>; // Change `any` to the actual type of your items in the array
@@ -27,10 +28,12 @@ const convertDateString = (originalDateString: any) => {
 }
 
 const Activity: React.FC<ActivityProps> = ({ blog }) => {
+  const trans = useTrans()
+
   return (
   <div className="activity">
     <div className="container">
-      <p className="activity-title">Activity</p>
+      <p className="activity-title">{trans.home.activity}</p>
       <Carousel
         arrows
         dots={false}
