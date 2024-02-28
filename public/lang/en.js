@@ -78,6 +78,17 @@ export default {
         message: 'Message',
         send: 'Send Message',
         detail: 'Contact Detail'
+    },
+    search: {
+        name: 'Enter a destination or property',
+        price: 'Choose Price',
+        address: 'Choose Address',
+        price_1: '50$ and below',
+        price_2: '50$ to 100$',
+        price_3: '100$ to 200$',
+        price_4: '200$ & above',
+        search: 'Search'
+
     }
 
 }

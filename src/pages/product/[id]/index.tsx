@@ -65,14 +65,15 @@ export default function ProductDetail() {
   const [bedroom, setBedroom] = useState<any>();
   const [bathroom, setBathroom] = useState<any>();
   const [districts, setDistricts] = useState<any>();
+  const id = router.query.id;
 
   useEffect(() => {
-    let id = router.query.id;
-
     if (id) {
       axios
         .get("https://web-developing.site/api/rooms/" + id, {
-          
+          params: {
+            lang: locale
+          }
         })
         .then((response) => {
           setProduct(response.data);
@@ -81,7 +82,17 @@ export default function ProductDetail() {
   }, [router.query.id]);
 
   useEffect(() => {
-    getProduct();
+    if (id) {
+      axios
+        .get("https://web-developing.site/api/rooms/" + id, {
+          params: {
+            lang: locale
+          }
+        })
+        .then((response) => {
+          setProduct(response.data);
+        });
+    }
   }, [locale]);
 
   useEffect(() => {
@@ -262,11 +273,11 @@ export default function ProductDetail() {
                                 >
                                   <Image
                                     width={20}
-                                    style={{ marginRight: "20px" }}
                                     alt=""
                                     src={`/icon/badge.png`}
+                                    preview={false}
                                   />
-                                  <span>{value}</span>
+                                  <span style={{ marginLeft: "5px" }}>{value}</span>
                                 </div>
                               </Col>
                             )
@@ -289,11 +300,11 @@ export default function ProductDetail() {
                                 >
                                   <Image
                                     width={20}
-                                    style={{ marginRight: "20px" }}
                                     alt=""
                                     src={`/icon/badge.png`}
+                                    preview={false}
                                   />
-                                  <span>{value}</span>
+                                  <span style={{ marginLeft: "5px" }}>{value}</span>
                                 </div>
                               </Col>
                             )
@@ -349,7 +360,7 @@ export default function ProductDetail() {
                       <Form.Item name={"Email"} rules={[{ type: "email" }]}>
                         <Input
                           style={{ width: "310px" }}
-                          placeholder="Your Email"
+                          placeholder="Email"
                         />
                       </Form.Item>
                       <Form.Item name={["Phone"]}>

@@ -78,6 +78,16 @@ export default {
         message: 'Nội dung',
         send: 'Gửi',
         detail: 'Thông tin'
+    },
+    search: {
+        name: 'Nhập điểm đến hoặc nơi lưu trú',
+        price: 'Giá',
+        address: 'Địa chỉ',
+        price_1: 'Thấp hơn 50$',
+        price_2: '50$ - 100$',
+        price_3: '100$ - 200$',
+        price_4: '200$ trở lên',
+        search: 'Tìm kiếm'
     }
 }
 

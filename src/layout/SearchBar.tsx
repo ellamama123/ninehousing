@@ -11,16 +11,11 @@ import {
     Select
   } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import type { RadioChangeEvent } from "antd";
 import axios from "axios";
 import { useRouter } from 'next/router';
+import useTrans from './useTrans'
 
-const optionPrice = [
-    { label: "50$ & below ", value: "Lessthan50" },
-    { label: "50$ to 100$", value: "About50To100" },
-    { label: "100$ to 200$", value: "About100To200" },
-    { label: "200$ & above ", value: "GretherThan200" },
-  ];
+
 
 interface District {
   code: string;
@@ -36,11 +31,18 @@ export default function SearchBar({ onChildData }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const currentRoute = router.pathname;
+  const trans = useTrans()
 
+  const handleChange = (value: string) => {
+    setPrice(value)
+  };
 
-const handleChange = (value: string) => {
-  setPrice(value)
-};
+  const optionPrice = [
+    { label: trans.search.price_1 , value: "Lessthan50" },
+    { label: trans.search.price_2, value: "About50To100" },
+    { label: trans.search.price_3, value: "About100To200" },
+    { label: trans.search.price_4, value: "GretherThan200" },
+  ];
 
   const changeStartDate = (data: any) => {
     setStartDate(data)
@@ -77,7 +79,7 @@ const handleChange = (value: string) => {
         <Input
             className="input-name"
             size="large"
-            placeholder="Enter a destination or property"
+            placeholder={ trans.search.name }
             prefix={<SearchOutlined />}
             onChange={(e) => setName(e.target.value)}
         />
@@ -110,7 +112,7 @@ const handleChange = (value: string) => {
             alignItems: "center",
         }}>
         <Select
-            defaultValue="Choose Price"
+            defaultValue={ trans.search.price }
             style={{ width: "90%", height: "100%" }}
             options={optionPrice}
             onChange={handleChange}
@@ -122,7 +124,7 @@ const handleChange = (value: string) => {
             alignItems: "center",
         }}>
         <Select
-            defaultValue="Choose Address"
+            defaultValue={ trans.search.address }
             style={{ width: "90%", height: "100%", }}
             onChange={value => {
             setRoomLocation(value)
@@ -151,7 +153,7 @@ const handleChange = (value: string) => {
             }}
             onClick={setUpdateProduct}
         >
-            Search
+            { trans.search.search }
         </Button>
         </Col>
     </Row>
