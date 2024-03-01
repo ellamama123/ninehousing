@@ -5,6 +5,7 @@ export default {
         product: 'Căn hộ',
         blog: 'Bài viết',
         about_us: 'Về chúng tôi',
+        favorite: 'Yêu thích',
         apartment: 'Căn hộ',
         apartment_viewed: 'Lượt xem',
         booked: 'Lượt đặt phòng',
@@ -39,6 +40,8 @@ export default {
         sort: 'Sắp xếp',
     },
     product_detail: {
+        add_favorite: 'Phòng này đã được thêm vào danh sách yêu thích.',
+        remove_favorite: 'Phòng này đã được loại bỏ khỏi danh sách yêu thích.',
         view: 'Lượt xem',
         br: 'PN',
         ba: 'WC',

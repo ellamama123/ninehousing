@@ -126,6 +126,7 @@ export default function Post() {
                             fontSize: "20px",
                             fontWeight: "bold",
                             color: "black",
+                            minHeight: "22px"
                           }}
                         >
                           {data?.title}
@@ -136,6 +137,7 @@ export default function Post() {
                             marginTop: "15px",
                             color: "black",
                             fontWeight: "500",
+                            minHeight: "22px"
                           }}
                           dangerouslySetInnerHTML={{ __html: data?.description }}
                         />

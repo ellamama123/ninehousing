@@ -342,7 +342,7 @@ label.ant-radio-wrapper {
 
 }
 
-span.ant-btn-icon {
+.ant-carousel span.ant-btn-icon {
   width: 2rem;
   height: 2rem;
   background: black;

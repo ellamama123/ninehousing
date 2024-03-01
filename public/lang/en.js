@@ -4,6 +4,7 @@ export default {
         title: 'Home',
         product: 'Our Product',
         blog: 'Blog',
+        favorite: 'Favorite',
         about_us: 'About Us',
         apartment: 'Apartment',
         apartment_viewed: 'Apartment Viewed',
@@ -39,6 +40,8 @@ export default {
         sort: 'Sort by',
     },
     product_detail: {
+        add_favorite: 'Your room has been added to the favorites list.',
+        remove_favorite: 'Your room has been removed to the favorites list.',
         view: 'Views',
         br: 'Br',
         ba: 'Ba',

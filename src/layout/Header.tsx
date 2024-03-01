@@ -40,6 +40,9 @@ const content = () => {
   <Menu.Item key="/about-us">
     <Link href="/about-us"><p> { trans.home.about_us } </p></Link>
   </Menu.Item>
+  <Menu.Item key="/favortie">
+    <Link href="/favortie"><p> { trans.home.favortie } </p></Link>
+  </Menu.Item>
 </Menu>);
 };
 
@@ -104,7 +107,7 @@ const Header = () => {
             <Select defaultValue={locale} onChange={handleLanguageChange}>
               <Select.Option value="vi">Tiếng Việt</Select.Option>
               <Select.Option value="en">English</Select.Option>
-          </Select>
+            </Select>
           </Col>
         </Row>
       </div>
@@ -131,14 +134,16 @@ const Header = () => {
               <p> { trans.home.blog } </p>
             </Button>
             <Button type="text" href="/about-us">
-            <p> { trans.home.about_us } </p>
+              <p> { trans.home.about_us } </p>
+            </Button>
+            <Button type="text" href="/favorite">
+              <p> { trans.home.favorite } </p>
             </Button>
             <div style={{ marginTop: '20px', display: "flex", alignItems: "center",  justifyContent: "center" }}>
-              {/* <Select
-                defaultValue="Tiếng Việt"
-                style={{ width: 120 }}
-                options={[{ value: "Tiếng Việt", label: "Tiếng Việt" }]}
-              /> */}
+              <Select defaultValue={locale} onChange={handleLanguageChange}>
+                  <Select.Option value="vi">Tiếng Việt</Select.Option>
+                  <Select.Option value="en">English</Select.Option>
+              </Select>
             </div>
           </div>
         </Drawer>

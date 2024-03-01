@@ -67,7 +67,7 @@ export default function Home() {
         params: {
           price: price,
           quickSearch: name,
-          "sortDesc[]": sort,
+          ...(sort !== "" && { "sortDesc[]": sort }),
           startDate: startDate,
           endDate: endDate,
           district: roomLocation,

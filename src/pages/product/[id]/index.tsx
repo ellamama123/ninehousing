@@ -19,6 +19,9 @@ import Head from "next/head";
 import Layout from "../../../layout/Layout";
 import useTrans from "../../../layout/useTrans";
 import Link from "next/link";
+import {
+  HeartFilled, HeartOutlined, PlusOutlined, MinusOutlined
+} from '@ant-design/icons';
 
 const layout = {
   labelCol: { span: 8 },
@@ -46,6 +49,7 @@ export default function ProductDetail() {
   const { locale } = useRouter()
   const router = useRouter();
   const [product, setProduct] = useState<{
+    id: any;
     images: any;
     name: any;
     address: any;
@@ -65,6 +69,7 @@ export default function ProductDetail() {
   const [bedroom, setBedroom] = useState<any>();
   const [bathroom, setBathroom] = useState<any>();
   const [districts, setDistricts] = useState<any>();
+  const [isFavorite, setIsFavorite] = useState<any>(false);
   const id = router.query.id;
 
   useEffect(() => {
@@ -78,6 +83,16 @@ export default function ProductDetail() {
         .then((response) => {
           setProduct(response.data);
         });
+        let room = localStorage.getItem('favoriteRoom');
+        if (room) {
+          let roomList = JSON.parse(room)
+          let existingRoomIndex = roomList.findIndex((room) => room.id === id);
+          if(existingRoomIndex != -1) {
+            setIsFavorite(false)
+          } else {
+            setIsFavorite(true)
+          }
+        }
     }
   }, [router.query.id]);
 
@@ -131,6 +146,55 @@ export default function ProductDetail() {
         messageApi.error(error.response.data.message, 1);
       });
   };
+
+  const toggleFavorite = () => {
+    let room = localStorage.getItem('favoriteRoom');
+    if (room) {
+      let roomList = JSON.parse(room)
+      let existingRoomIndex = roomList.findIndex((room) => room.id === product.id);
+      if(existingRoomIndex != -1) {
+        const updatedRoomList = [...roomList];
+        updatedRoomList.splice(existingRoomIndex, 1);
+        localStorage.setItem('favoriteRoom', JSON.stringify(updatedRoomList));
+        setIsFavorite(false)
+        messageApi.success(trans.product_detail.remove_favorite, 1);
+      } else {
+        let addRoom = {
+          id: product.id,
+          name: product.name,
+          address: product.address,
+          thumbnail: product.thumbnail,
+          description: product.description,
+          bedroom: product.bedroom,
+          bathroom: product.bathroom,
+          acreage: product.acreage,
+          price: product.price,
+          unit: product.unit,
+        }
+        const newRoomList = [...roomList, addRoom];
+        localStorage.setItem('favoriteRoom', JSON.stringify(newRoomList));
+        setIsFavorite(true)
+        messageApi.success(trans.product_detail.add_favorite, 1);
+      }
+    } else {
+      let addRoom = {
+        id: product.id,
+        name: product.name,
+        address: product.address,
+        thumbnail: product.thumbnail,
+        description: product.description,
+        bedroom: product.bedroom,
+        bathroom: product.bathroom,
+        acreage: product.acreage,
+        price: product.price,
+        unit: product.unit,
+      }
+      localStorage.setItem('favoriteRoom', JSON.stringify([addRoom]));
+      setIsFavorite(true)
+      messageApi.success(trans.product_detail.add_favorite, 1);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -199,14 +263,22 @@ export default function ProductDetail() {
             <div style={{ marginTop: "40px" }}>
               <Row justify="space-between">
                 <Col lg={14} span={24}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      alt=""
-                      width={20}
-                      style={{ marginRight: "10px" }}
-                      src={`/icon/eye.png`}
-                    />
-                    <span>{product?.view_count} {trans.product_detail.view}</span>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <img
+                        alt=""
+                        width={20}
+                        style={{ marginRight: "10px" }}
+                        src={`/icon/eye.png`}
+                      />
+                      <span>{product?.view_count} {trans.product_detail.view}</span>
+                    </div>
+                    <div>
+                      {
+                        !isFavorite ? <Button type="primary" size="large" danger icon={<HeartOutlined />} onClick={toggleFavorite}>Favorite</Button> : <Button type="primary" size="large" icon={<HeartFilled />}  danger onClick={toggleFavorite}>Remove</Button> 
+                      }
+                      
+                    </div>
                   </div>
                   <div>
                     <Row>
@@ -524,13 +596,14 @@ export default function ProductDetail() {
                                         style={{
                                           fontSize: "20px",
                                           fontWeight: "bold",
+                                          minHeight: "50px"
                                         }}
                                       >
                                         {prd?.name}
                                       </p>
                                     </Col>
                                     <Col span={24}>
-                                      <p style={{ marginTop: "10px" }}>
+                                      <p style={{ marginTop: "10px", minHeight: "15px" }}>
                                         {prd?.address}
                                       </p>
                                     </Col>
