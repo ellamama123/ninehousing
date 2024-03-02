@@ -86,8 +86,8 @@ export default function ProductDetail() {
         let room = localStorage.getItem('favoriteRoom');
         if (room) {
           let roomList = JSON.parse(room)
-          let existingRoomIndex = roomList.findIndex((room) => room.id === id);
-          if(existingRoomIndex != -1) {
+          let existingRoomIndex = roomList.findIndex((room) => room.id == router.query.id);
+          if(existingRoomIndex == -1) {
             setIsFavorite(false)
           } else {
             setIsFavorite(true)
@@ -173,6 +173,8 @@ export default function ProductDetail() {
         }
         const newRoomList = [...roomList, addRoom];
         localStorage.setItem('favoriteRoom', JSON.stringify(newRoomList));
+        console.log('da vao 2')
+
         setIsFavorite(true)
         messageApi.success(trans.product_detail.add_favorite, 1);
       }
@@ -190,6 +192,8 @@ export default function ProductDetail() {
         unit: product.unit,
       }
       localStorage.setItem('favoriteRoom', JSON.stringify([addRoom]));
+      console.log('da vao 3')
+
       setIsFavorite(true)
       messageApi.success(trans.product_detail.add_favorite, 1);
     }
@@ -275,9 +279,8 @@ export default function ProductDetail() {
                     </div>
                     <div>
                       {
-                        !isFavorite ? <Button type="primary" size="large" danger icon={<HeartOutlined />} onClick={toggleFavorite}>Favorite</Button> : <Button type="primary" size="large" icon={<HeartFilled />}  danger onClick={toggleFavorite}>Remove</Button> 
+                        !isFavorite || isFavorite == false ? <Button size="large" icon={<HeartOutlined />} onClick={toggleFavorite}>Favorite</Button> : <Button size="large" icon={<HeartFilled />} danger onClick={toggleFavorite}>Remove</Button> 
                       }
-                      
                     </div>
                   </div>
                   <div>

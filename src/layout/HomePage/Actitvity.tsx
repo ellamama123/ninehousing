@@ -123,8 +123,8 @@ const Activity: React.FC<ActivityProps> = ({ blog }) => {
                               d="M17 14L23 20L17 26"
                               stroke="white"
                               strokeWidth="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinecap="round"
+                              strokeLinecap="round"
                             />
                           </svg>
                         </Link>

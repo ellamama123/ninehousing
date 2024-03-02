@@ -31,14 +31,20 @@ export default function Favorite() {
           }}
         >
           <h4 style={{ paddingTop: "20px", marginBottom: '50px', fontSize: '30px', fontWeight: 'bold', textTransform: 'uppercase', fontFamily: 'SANS-SERIF' }}>
-            Yêu thích
+            {trans.home.favorite}
           </h4>
           <div>
               <div style={{border: '1px solid gray' ,padding: '50px', marginBottom: '50px'}}>
-                  <p style={{fontSize: '22px', fontFamily: 'SANS-SERIF' }}>{favoriteRoom.length} sản phẩm</p>
+                  <p style={{fontSize: '22px', fontFamily: 'SANS-SERIF' }}>{favoriteRoom.length} {trans.home.favorite_0}</p>
                   <div>
                     {
-                      favoriteRoom &&
+                      !favoriteRoom || favoriteRoom.length === 0 ? (
+                        <>
+                          <p style={{marginTop: '40px', fontSize: '40px', fontWeight: 'bold', fontFamily: 'SANS-SERIF'}}>{trans.home.favorite_1}</p>
+                          <p stype={{ fontFamily: 'SANS-SERIF' }}>{trans.home.favorite_2}</p>
+                        </>
+                      ) :
+                      (favoriteRoom &&
                       favoriteRoom.map((prd: any, index: any) => (
                         <Link
                           key={index}
@@ -143,7 +149,7 @@ export default function Favorite() {
                         </Row>
                         </Link>
 
-                      ))
+                      )))
                     }
                   </div>
               </div>

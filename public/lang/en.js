@@ -20,7 +20,10 @@ export default {
         map: 'Interactive map',
         customer_say: 'What customers say about us',
         activity: 'Activity',
-        partner: 'Our partners'
+        partner: 'Our partners',
+        favorite_0: 'products',
+        favorite_1: 'THERE IS NO PRODUCT IN YOUR WISHLIST.',
+        favorite_2: 'Click the heart icon to add the product to your wishlist..'
     },
     post: {
         post: "Blog",

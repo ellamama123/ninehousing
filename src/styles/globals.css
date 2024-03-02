@@ -95,6 +95,16 @@ a {
   text-decoration: none;
 }
 
+.hidden {
+  opacity: 0 !important;
+  z-index: 1 !important;
+  visibility: hidden !important;
+}
+
+.ant-spin-dot-item {
+  background-color: #DEB25F !important;
+}
+
 .container {
   width: 85%;
   margin: 0 auto;

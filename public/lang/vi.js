@@ -20,7 +20,10 @@ export default {
         map: 'Bản đồ tương tác',
         customer_say: 'Khách hàng nói gì',
         activity: 'Hoạt động',
-        partner: 'Đối tác'
+        favorite_0: 'sản phẩm',
+        partner: 'Đối tác',
+        favorite_1: 'KHÔNG CÓ SẢN PHẨM NÀO TRONG DANH SÁCH MONG MUỐN CỦA BẠN.',
+        favorite_2: 'Nhấn vào dấu trái tim để thêm sản phẩm vào danh sách mong muốn của bạn.'
     },
     post: {
         post: "Bài viết",

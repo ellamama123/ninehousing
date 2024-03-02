@@ -40,8 +40,8 @@ const content = () => {
   <Menu.Item key="/about-us">
     <Link href="/about-us"><p> { trans.home.about_us } </p></Link>
   </Menu.Item>
-  <Menu.Item key="/favortie">
-    <Link href="/favortie"><p> { trans.home.favortie } </p></Link>
+  <Menu.Item key="/favorite">
+    <Link href="/favorite"><p> { trans.home.favorite } </p></Link>
   </Menu.Item>
 </Menu>);
 };
@@ -147,7 +147,6 @@ const Header = () => {
             </div>
           </div>
         </Drawer>
-      
     </div>
   );
 };

@@ -14,9 +14,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useRouter } from 'next/router';
 import useTrans from './useTrans'
-
-
-
 interface District {
   code: string;
   name: string;
@@ -60,6 +57,7 @@ export default function SearchBar({ onChildData }) {
         ...districtList?.map(district => ({ value: district.code, label: district.name }))
       ])
     })
+
   }, []);
 
   const setUpdateProduct = () => {
@@ -72,6 +70,15 @@ export default function SearchBar({ onChildData }) {
       onChildData(name, price, startDate, endDate, roomLocation);
     }
   }
+
+  useEffect(() => {
+    const searchBar = document.querySelector(".search-bar-home");
+    console.log("searchBar:", searchBar);
+  
+    if (currentRoute === '/' && window.innerWidth < 992 && searchBar) {
+      searchBar.style.display = "none";
+    }
+  }, [currentRoute]);
 
   return (
     <Row>

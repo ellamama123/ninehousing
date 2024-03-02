@@ -12,11 +12,17 @@ import Partner from '@/layout/HomePage/Partner';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
+import {
+  Image
+} from "antd";
+import { Spin } from 'antd';
 
 export default function Home() {
   const [slide, setSlide] = useState([]);
   const [blog, setBlog] = useState([]);
   const [home, setHome] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { locale } = useRouter()
   const getProduct = () => {
     axios
@@ -34,6 +40,11 @@ export default function Home() {
 
   useEffect(() => {
     getProduct();
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 400);
+
+    return () => clearTimeout(loadingTimeout);
   }, []);
   
   useEffect(() => {
@@ -48,15 +59,40 @@ export default function Home() {
         <link rel="icon" href="/image/logo.png" />
       </Head>
       <Layout> 
-        <MainCarousel slide={slide} />
-        <DivOne />
-        <WhyChooseUs />
-        <OurApartments home={home} />
-        <Reservation />
-        <InteractiveMap />
-        <CustomerSay />
-        <Activity blog={blog} />
-        <Partner />
+      
+      {/* <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 999,
+            opacity: 1,
+            transition: '0.5s'
+          }}
+          className={isLoading? '' : 'hidden'}
+        >
+          <div>
+            <Spin size="large" />
+          </div>
+      </div> */}
+      <div>
+          <MainCarousel slide={slide} />
+          <DivOne />
+          <WhyChooseUs />
+          <OurApartments home={home} />
+          <Reservation />
+          <InteractiveMap />
+          <CustomerSay />
+          <Activity blog={blog} />
+          <Partner />
+        </div>
+
       </Layout>
     </>
   )
