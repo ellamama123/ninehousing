@@ -73,7 +73,6 @@ export default function SearchBar({ onChildData }) {
 
   useEffect(() => {
     const searchBar = document.querySelector(".search-bar-home");
-    console.log("searchBar:", searchBar);
   
     if (currentRoute === '/' && window.innerWidth < 992 && searchBar) {
       searchBar.style.display = "none";

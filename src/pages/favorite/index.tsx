@@ -35,10 +35,10 @@ export default function Favorite() {
           </h4>
           <div>
               <div style={{border: '1px solid gray' ,padding: '50px', marginBottom: '50px'}}>
-                  <p style={{fontSize: '22px', fontFamily: 'SANS-SERIF' }}>{favoriteRoom.length} {trans.home.favorite_0}</p>
+                  <p style={{fontSize: '22px', fontFamily: 'SANS-SERIF' }}>{favoriteRoom ? favoriteRoom.length : 0} {trans.home.favorite_0}</p>
                   <div>
                     {
-                      !favoriteRoom || favoriteRoom.length === 0 ? (
+                      !favoriteRoom || (favoriteRoom && favoriteRoom.length === 0) ? (
                         <>
                           <p style={{marginTop: '40px', fontSize: '40px', fontWeight: 'bold', fontFamily: 'SANS-SERIF'}}>{trans.home.favorite_1}</p>
                           <p stype={{ fontFamily: 'SANS-SERIF' }}>{trans.home.favorite_2}</p>
