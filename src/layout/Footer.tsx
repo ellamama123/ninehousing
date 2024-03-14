@@ -73,7 +73,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <a href="mailto:ninehousing99@mail.com">ninehousing99@mail.com</a>
+                        <a href="mailto:Ninehousing99@mail.com">Ninehousing99@mail.com</a>
                       </Col>
                     </Row>
                     <Row style={{ marginTop: "25px" }}>
@@ -95,7 +95,7 @@ const Footer = () => {
                         </svg>
                       </Col>
                       <Col style={{ marginLeft: "10px" }}>
-                        <a href="tel:0968071393">0968.071.393</a>
+                        <a href="tel:0968071393">0968.071.393</a> - <a href="tel:0984680660">0984.680.660</a>
                       </Col>
                     </Row>
                   </Col>
@@ -125,7 +125,7 @@ const Footer = () => {
           </Col>
 
           {/* <Col lg={8} span={24}>
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNINEHousing&tabs=timeline&width=200&height=200&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="200" height="200" style={{border: "none", overflow:"hidden"}} scrolling="no" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNinehousing&tabs=timeline&width=200&height=200&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="200" height="200" style={{border: "none", overflow:"hidden"}} scrolling="no" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </Col> */}
         </Row>
       </div>

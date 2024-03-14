@@ -152,7 +152,7 @@ export default function Contact() {
                       </Col>
                       <Col span={20}>
                         <span style={{ fontSize: '18px' }}> 
-                          ninehousing99@mail.com
+                          Ninehousing99@mail.com
                         </span>
                       </Col>
                     </Row>
@@ -164,7 +164,7 @@ export default function Contact() {
                       </Col>
                       <Col span={20}>
                         <span style={{ fontSize: '18px' }}>
-                          0968.071.393
+                          0968.071.393 - 0984.680.660s
                         </span>
                       </Col>
                     </Row>

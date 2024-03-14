@@ -10,7 +10,7 @@ export default function Contact() {
           </a>
         </div>
         <div className="mail-icon">
-          <a href="mailto:ninehousing99@mail.com">
+          <a href="mailto:Ninehousing99@mail.com">
             <MailOutlined />
           </a>
         </div>
